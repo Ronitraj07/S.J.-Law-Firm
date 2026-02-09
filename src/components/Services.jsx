@@ -28,13 +28,16 @@ const services = [
 function Services() {
   return (
     <section className="section" id="services">
-      <h2 style={{ fontSize: "1.7rem", marginBottom: "0.8rem" }}>Core areas of practice</h2>
+      <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 1.9rem)', marginBottom: '1rem', fontFamily: 'Georgia, serif' }}>
+        Core areas of practice
+      </h2>
       <p
         style={{
-          color: "#d1d5db",
-          maxWidth: "40rem",
-          fontSize: "0.95rem",
-          marginBottom: "2rem",
+          color: '#a8a8a8',
+          maxWidth: '45rem',
+          fontSize: 'clamp(0.9rem, 2vw, 0.98rem)',
+          marginBottom: '2.5rem',
+          lineHeight: 1.6,
         }}
       >
         S. &amp; J. Associates supports individuals and businesses across contentious and
@@ -42,19 +45,21 @@ function Services() {
       </p>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))",
-          gap: "1.5rem",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '1.5rem',
         }}
       >
         {services.map((s) => (
           <article
             key={s.title}
             className="glass-card"
-            style={{ padding: "1.6rem 1.5rem", borderRadius: "16px" }}
+            style={{ padding: '1.8rem 1.6rem', borderRadius: '14px' }}
           >
-            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.45rem" }}>{s.title}</h3>
-            <p style={{ fontSize: "0.9rem", color: "#e5e7eb" }}>{s.desc}</p>
+            <h3 style={{ fontSize: '1.15rem', marginBottom: '0.6rem', color: '#c9a961', fontFamily: 'Georgia, serif' }}>
+              {s.title}
+            </h3>
+            <p style={{ fontSize: '0.92rem', color: '#e5e7eb', lineHeight: 1.6 }}>{s.desc}</p>
           </article>
         ))}
       </div>

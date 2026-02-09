@@ -22,13 +22,16 @@ const team = [
 function Team() {
   return (
     <section className="section" id="team">
-      <h2 style={{ fontSize: "1.7rem", marginBottom: "0.8rem" }}>Our lawyers</h2>
+      <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 1.9rem)', marginBottom: '1rem', fontFamily: 'Georgia, serif' }}>
+        Our lawyers
+      </h2>
       <p
         style={{
-          color: "#d1d5db",
-          maxWidth: "40rem",
-          fontSize: "0.95rem",
-          marginBottom: "2rem",
+          color: '#a8a8a8',
+          maxWidth: '45rem',
+          fontSize: 'clamp(0.9rem, 2vw, 0.98rem)',
+          marginBottom: '2.5rem',
+          lineHeight: 1.6,
         }}
       >
         The team at S. &amp; J. Associates combines experience across litigation, corporate and
@@ -36,41 +39,44 @@ function Team() {
       </p>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
-          gap: "1.5rem",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: '1.8rem',
         }}
       >
         {team.map((m) => (
           <article
             key={m.name}
             className="glass-card"
-            style={{ padding: "1.5rem", borderRadius: "16px" }}
+            style={{ padding: '1.8rem 1.6rem', borderRadius: '14px' }}
           >
             <div
               style={{
-                width: "54px",
-                height: "54px",
-                borderRadius: "999px",
-                background:
-                  "linear-gradient(135deg, rgba(239,246,255,0.16), rgba(59,130,246,0.8))",
-                marginBottom: "0.9rem",
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, rgba(201,169,97,0.3), rgba(26,26,26,0.9))',
+                marginBottom: '1.2rem',
+                border: '2px solid rgba(201,169,97,0.5)',
               }}
             />
-            <h3 style={{ fontSize: "1.05rem", marginBottom: "0.1rem" }}>{m.name}</h3>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.3rem', fontFamily: 'Georgia, serif' }}>
+              {m.name}
+            </h3>
             <p
               style={{
-                fontSize: "0.85rem",
-                color: "#a5b4fc",
-                marginBottom: "0.3rem",
+                fontSize: '0.88rem',
+                color: '#c9a961',
+                marginBottom: '0.6rem',
+                fontWeight: 600,
               }}
             >
               {m.role}
             </p>
-            <p style={{ fontSize: "0.9rem", color: "#e5e7eb", marginBottom: "0.4rem" }}>
+            <p style={{ fontSize: '0.92rem', color: '#e5e7eb', marginBottom: '0.6rem', lineHeight: 1.5 }}>
               {m.spec}
             </p>
-            <p style={{ fontSize: "0.85rem", color: "#cbd5f5" }}>{m.phone}</p>
+            <p style={{ fontSize: '0.88rem', color: '#a8a8a8' }}>{m.phone}</p>
           </article>
         ))}
       </div>
