@@ -32,6 +32,39 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0d0d0d 100%);
+  position: relative;
+}
+
+/* Legal pattern overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 50px,
+      rgba(201, 169, 97, 0.02) 50px,
+      rgba(201, 169, 97, 0.02) 51px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 50px,
+      rgba(201, 169, 97, 0.02) 50px,
+      rgba(201, 169, 97, 0.02) 51px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 h1, h2, h3 {

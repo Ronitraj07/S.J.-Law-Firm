@@ -1,8 +1,90 @@
+import heroBg from '../assets/images/hero-bg.jpg';  // ← Add this line at the very top
+
 function Hero() {
   return (
-    <header className="section" id="home" style={{ paddingTop: '2rem' }}>
+    <header className="section" id="home" style={{ paddingTop: '2rem', position: 'relative', overflow: 'hidden' }}>
+      {/* Background Image */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: -1
+      }}>
+        <div style={{
+          width: '100%',
+          height: '100%',
+          backgroundImage: `url(${heroBg})`,  // ← Use the imported variable
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.12,
+          filter: 'grayscale(100%)'
+        }} />
+        {/* Dark overlay */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'linear-gradient(135deg, rgba(0,0,0,0.92), rgba(26,26,26,0.88), rgba(0,0,0,0.90))'
+        }} />
+      </div>
+
+      {/* Animated Floating Legal Icons */}
+      <div style={{
+        position: 'absolute',
+        top: '10%',
+        right: '5%',
+        fontSize: '80px',
+        opacity: 0.06,
+        animation: 'float 8s ease-in-out infinite',
+        pointerEvents: 'none'
+      }}>
+        ⚖️
+      </div>
+      
+      <div style={{
+        position: 'absolute',
+        bottom: '15%',
+        left: '8%',
+        fontSize: '60px',
+        opacity: 0.05,
+        animation: 'float 10s ease-in-out infinite 2s',
+        pointerEvents: 'none'
+      }}>
+        🏛️
+      </div>
+
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '12%',
+        fontSize: '50px',
+        opacity: 0.04,
+        animation: 'float 12s ease-in-out infinite 4s',
+        pointerEvents: 'none'
+      }}>
+        📚
+      </div>
+
+      <div style={{
+        position: 'absolute',
+        top: '30%',
+        right: '15%',
+        fontSize: '45px',
+        opacity: 0.04,
+        animation: 'float 11s ease-in-out infinite 3s',
+        pointerEvents: 'none'
+      }}>
+        📜
+      </div>
+      
+      {/* Main Content */}
       <div
-        className="glass-card"
+        className="glass-card animate-fadeInUp"
         style={{
           padding: '3rem 2.5rem',
           display: 'grid',
@@ -10,7 +92,7 @@ function Hero() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
         }}
       >
-        <div>
+        <div className="animate-slideInLeft">
           <p
             style={{
               textTransform: 'uppercase',
@@ -22,7 +104,7 @@ function Hero() {
               fontWeight: 600,
             }}
           >
-            S. &amp; J. Associates • Legal Services
+            ⚖️ S. &amp; J. Associates • Legal Services
           </p>
           <h1
             style={{
@@ -64,7 +146,7 @@ function Hero() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="animate-slideInRight" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div
             className="glass-card"
             style={{
@@ -77,7 +159,7 @@ function Hero() {
             }}
           >
             <p style={{ fontSize: '0.85rem', color: '#c9a961', marginBottom: '0.5rem', fontWeight: 600 }}>
-              Speak with our team
+              📞 Speak with our team
             </p>
             <p style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '1rem', color: '#f9fafb' }}>
               Professional. Practical. Reliable.
