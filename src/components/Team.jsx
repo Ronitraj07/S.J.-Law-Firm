@@ -3,21 +3,21 @@ const team = [
     name: "Adv. Rituraj Sinha",
     role: "Advocate",
     phone: "+91 82003 80901",
-    spec: "Litigation and dispute resolution.",
+    spec: "Criminal and Motor accident claim specialist.",
     photo: "/team/rituraj.jpg" // Your photo path
   },
   {
     name: "Adv. Swati Verma",
     role: "Advocate",
     phone: "+91 88004 13165",
-    spec: "Corporate, commercial and data privacy matters.",
+    spec: "Family law, consumer disputes and documentation.",
     photo: "/team/swati.jpg" // Your photo path
   },
   {
     name: "Adv. Abhishek Verma",
     role: "Advocate",
     phone: "+91 98710 12151",
-    spec: "Family law, consumer disputes and documentation.",
+    spec: "Corporate, commercial and data privacy matters. ",
     photo: "/team/abhishek.jpg" // Your photo path
   },
 ];
@@ -26,7 +26,7 @@ function Team() {
   return (
     <section className="section" id="team">
       <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 1.9rem)', marginBottom: '1rem', fontFamily: 'Georgia, serif' }}>
-        Our lawyers
+        Our Team
       </h2>
       <p
         style={{
