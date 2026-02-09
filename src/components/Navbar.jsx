@@ -37,7 +37,7 @@ function Navbar() {
             color: "#c9a961",
             fontFamily: 'Georgia, serif'
           }}>
-            S. &amp; J. ASSOCIATES
+            S. &amp; J. ASSOCIATES (Law Firm)
           </div>
         </a>
         <div className="nav-links">
