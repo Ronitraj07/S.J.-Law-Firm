@@ -1,3 +1,5 @@
+import logo from '../assets/logo.png';
+
 function Navbar() {
   return (
     <nav className="navbar">
@@ -15,8 +17,8 @@ function Navbar() {
           onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
         >
           <img 
-            src="/logo.png" 
-            alt="S. & J. Associates Logo" 
+            src={logo}
+            alt="S. & J. Associates Logo"
             style={{ 
               height: 'clamp(40px, 5vw, 50px)', 
               width: 'auto',
@@ -35,7 +37,7 @@ function Navbar() {
             color: "#c9a961",
             fontFamily: 'Georgia, serif'
           }}>
-            S. &amp; J. ASSOCIATES (Law Firm)
+            S. &amp; J. ASSOCIATES
           </div>
         </a>
         <div className="nav-links">
