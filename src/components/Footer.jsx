@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { teamMembers } from '../data/team.js';
 
 function Footer() {
   return (
@@ -10,6 +9,7 @@ function Footer() {
     }}>
       <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.2rem', textAlign: 'center' }}>
 
+        {/* Firm Name */}
         <span style={{
           fontWeight: 700,
           letterSpacing: '0.12em',
@@ -25,29 +25,32 @@ function Footer() {
           Client-focused law firm delivering practical, ethical and result-driven legal solutions.
         </p>
 
-        {/* Enrollment Numbers */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.4rem 2rem', marginTop: '0.4rem' }}>
-          {teamMembers.map((m) => (
-            <span key={m.slug} style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.03em' }}>
-              {m.name} &mdash; {m.barCouncil.name}, Enrl. No. {m.barCouncil.enrollmentNumber}
-            </span>
-          ))}
-        </div>
+        {/* Office Address */}
+        <address style={{ fontStyle: 'normal', fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.9 }}>
+          325 Broadway Empire, Vasan Bhayli Main Road,<br />
+          Near Nilamber Circle, Vadodara &mdash; 391410, Gujarat, India<br />
+          <a href="mailto:contact@sjassociates.com" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>
+            contact@sjassociates.com
+          </a>
+        </address>
 
         <div style={{ width: '60px', height: '1px', background: 'rgba(201,161,74,0.3)' }} />
 
-        {/* Legal Links */}
-        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <Link to="/privacy-policy" style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
-            Privacy Policy
-          </Link>
-          <Link to="/disclaimer" style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
-            Disclaimer
-          </Link>
-          <Link to="/contact" style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
-            Contact Us
-          </Link>
-        </div>
+        {/* Nav Links */}
+        <nav aria-label="Footer navigation" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {[
+            { to: '/services', label: 'Services' },
+            { to: '/team', label: 'Our Team' },
+            { to: '/resources', label: 'Resources' },
+            { to: '/contact', label: 'Contact' },
+            { to: '/privacy-policy', label: 'Privacy Policy' },
+            { to: '/disclaimer', label: 'Disclaimer' },
+          ].map(({ to, label }) => (
+            <Link key={to} to={to} style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
+              {label}
+            </Link>
+          ))}
+        </nav>
 
         {/* BCI Mandatory Disclaimer */}
         <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.7, maxWidth: '680px', marginTop: '0.4rem' }}>
