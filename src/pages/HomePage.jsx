@@ -7,15 +7,6 @@ import { services } from '../data/services';
 import { teamMembers } from '../data/team';
 import heroBg from '../assets/images/hero-bg.jpg';
 
-function StatCounter({ value, label }) {
-  return (
-    <div style={{ textAlign: 'center', padding: '1.5rem 1rem' }}>
-      <p style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: 'var(--gold)', fontFamily: 'var(--font-heading)', lineHeight: 1, marginBottom: '0.5rem' }}>{value}</p>
-      <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.65)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{label}</p>
-    </div>
-  );
-}
-
 function DisclaimerGate({ onAgree }) {
   return (
     <div style={{
@@ -32,13 +23,10 @@ function DisclaimerGate({ onAgree }) {
         overflow: 'hidden',
         boxShadow: '0 24px 64px rgba(0,0,0,0.5)',
       }}>
-        {/* Header */}
         <div style={{ background: 'var(--navy)', padding: '1.6rem 2rem', borderBottom: '3px solid var(--gold)' }}>
           <p style={{ fontSize: '0.7rem', color: 'var(--gold)', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '0.4rem' }}>Important Notice</p>
           <h2 style={{ color: '#fff', fontSize: '1.2rem', fontFamily: 'var(--font-heading)', margin: 0 }}>Disclaimer &amp; Confirmation</h2>
         </div>
-
-        {/* Body */}
         <div style={{ padding: '1.8rem 2rem' }}>
           <p style={{ fontSize: '0.88rem', color: '#333', lineHeight: 1.75, marginBottom: '1.2rem' }}>
             As per the rules of the Bar Council of India, we are not permitted to solicit work or advertise. By clicking <strong>"I Agree"</strong> below, you acknowledge the following:
@@ -57,36 +45,17 @@ function DisclaimerGate({ onAgree }) {
             If you have any legal issues, you must, in all cases, seek independent legal advice from a qualified advocate.
           </p>
         </div>
-
-        {/* Actions */}
         <div style={{ padding: '1rem 2rem 1.8rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
           <button
             onClick={onAgree}
-            style={{
-              padding: '0.65rem 2.2rem', borderRadius: '4px',
-              background: 'var(--navy)', color: '#fff',
-              border: '2px solid var(--navy)',
-              fontSize: '0.88rem', fontWeight: 700,
-              cursor: 'pointer', letterSpacing: '0.06em',
-              transition: 'background 0.2s',
-            }}
+            style={{ padding: '0.65rem 2.2rem', borderRadius: '4px', background: 'var(--navy)', color: '#fff', border: '2px solid var(--navy)', fontSize: '0.88rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '0.06em', transition: 'background 0.2s' }}
             onMouseEnter={e => e.currentTarget.style.background = '#0a1628'}
             onMouseLeave={e => e.currentTarget.style.background = 'var(--navy)'}
-          >
-            I Agree
-          </button>
+          >I Agree</button>
           <button
             onClick={() => { window.location.href = 'https://www.google.com'; }}
-            style={{
-              padding: '0.65rem 2.2rem', borderRadius: '4px',
-              background: 'transparent', color: 'var(--navy)',
-              border: '2px solid var(--navy)',
-              fontSize: '0.88rem', fontWeight: 700,
-              cursor: 'pointer', letterSpacing: '0.06em',
-            }}
-          >
-            I Disagree
-          </button>
+            style={{ padding: '0.65rem 2.2rem', borderRadius: '4px', background: 'transparent', color: 'var(--navy)', border: '2px solid var(--navy)', fontSize: '0.88rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '0.06em' }}
+          >I Disagree</button>
         </div>
       </div>
     </div>
@@ -94,7 +63,6 @@ function DisclaimerGate({ onAgree }) {
 }
 
 function HomePage() {
-  const combinedYears = teamMembers.reduce((sum, m) => sum + m.yearsOfPractice, 0);
   const [showGate, setShowGate] = useState(false);
 
   useEffect(() => {
@@ -121,15 +89,6 @@ function HomePage() {
 
       <Hero />
       <AccreditationsBar />
-
-      {/* Stats Counter */}
-      <section style={{ background: 'var(--navy)', borderBottom: '1px solid rgba(201,161,74,0.2)' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
-          <StatCounter value={`${combinedYears}+`} label="Combined Years of Practice" />
-          <StatCounter value={`${services.length}`} label="Practice Areas" />
-          <StatCounter value="3" label="Courts of Enrollment" />
-        </div>
-      </section>
 
       {/* Practice Areas */}
       <section className="section">
