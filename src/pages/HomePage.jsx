@@ -35,10 +35,7 @@ function HomePage() {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Hero */}
       <Hero />
-
-      {/* Accreditations Bar */}
       <AccreditationsBar />
 
       {/* Stats Counter */}
@@ -50,7 +47,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Practice Areas Highlights */}
+      {/* Practice Areas */}
       <section className="section">
         <div className="animate-fadeInUp">
           <p className="section-label">What We Do</p>
@@ -138,7 +135,13 @@ function HomePage() {
           ))}
         </div>
         <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-          <Link to="/team"><button className="btn-outline">View All Advocates</button></Link>
+          <Link
+            to="/team"
+            className="btn-outline"
+            style={{ textDecoration: 'none' }}
+          >
+            View All Advocates
+          </Link>
         </div>
       </section>
 
@@ -159,7 +162,13 @@ function HomePage() {
           <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '2rem', lineHeight: 1.75, fontSize: '0.95rem' }}>
             We offer an initial consultation to help you understand your legal position before you commit to any course of action.
           </p>
-          <Link to="/contact"><button className="btn-primary">Book a Consultation</button></Link>
+          <Link
+            to="/contact"
+            className="btn-primary"
+            style={{ textDecoration: 'none' }}
+          >
+            Book a Consultation
+          </Link>
         </div>
       </section>
     </>

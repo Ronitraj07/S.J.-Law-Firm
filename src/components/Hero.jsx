@@ -1,9 +1,9 @@
+import { Link } from 'react-router-dom';
 import heroBg from '../assets/images/hero-bg.jpg';
 
 function Hero() {
   return (
     <header id="home" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Full-bleed background */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <img
           src={heroBg}
@@ -32,7 +32,6 @@ function Hero() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           alignItems: 'center',
         }}>
-          {/* Left content */}
           <div className="animate-slideInLeft">
             <p className="section-label" style={{ color: 'var(--gold)' }}>S. &amp; J. Associates • Legal Services</p>
             <h1 style={{ marginBottom: '1.5rem', color: '#FFFFFF' }}>
@@ -49,12 +48,23 @@ function Hero() {
               reliable legal support in contentious and non‑contentious matters.
             </p>
             <div style={{ marginTop: '2.2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <a href="#contact"><button className="btn-primary">Book a Consultation</button></a>
-              <a href="#services"><button className="btn-outline" style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.4)' }}>Our Practice Areas</button></a>
+              <Link
+                to="/contact"
+                className="btn-primary"
+                style={{ textDecoration: 'none' }}
+              >
+                Book a Consultation
+              </Link>
+              <a
+                href="#services"
+                className="btn-outline"
+                style={{ textDecoration: 'none', color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.4)' }}
+              >
+                Our Practice Areas
+              </a>
             </div>
           </div>
 
-          {/* Right card */}
           <div className="animate-slideInRight" style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{
               padding: '2.2rem 2rem',
