@@ -75,7 +75,7 @@ const articleContent = {
       },
       {
         heading: 'Common Drafting Problems',
-        body: 'Vague clauses such as “any disputes shall be settled by arbitration in India” are often unenforceable or lead to preliminary disputes about procedure. An enforceable clause should specify the seat, the rules, and the number of arbitrators at a minimum.'
+        body: 'Vague clauses such as "any disputes shall be settled by arbitration in India" are often unenforceable or lead to preliminary disputes about procedure. An enforceable clause should specify the seat, the rules, and the number of arbitrators at a minimum.'
       },
       {
         heading: 'Challenging an Arbitration Award',
@@ -149,7 +149,7 @@ function ArticlePage() {
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <Link to="/contact"><button className="btn-primary">Speak to an Advocate</button></Link>
+            <Link to="/contact" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-block' }}>Speak to an Advocate</Link>
           </div>
         </div>
       </section>

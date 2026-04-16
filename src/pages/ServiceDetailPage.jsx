@@ -81,7 +81,7 @@ function ServiceDetailPage() {
 
             <div className="glass-card" style={{ padding: '1.8rem', textAlign: 'center' }}>
               <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1.2rem', lineHeight: 1.65 }}>Have a matter in this area?</p>
-              <Link to="/contact"><button className="btn-primary" style={{ width: '100%' }}>Book a Consultation</button></Link>
+              <Link to="/contact" className="btn-primary" style={{ display: 'inline-block', width: '100%', textAlign: 'center', textDecoration: 'none' }}>Book a Consultation</Link>
             </div>
           </div>
         </div>
