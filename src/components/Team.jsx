@@ -56,13 +56,13 @@ function Team() {
                   height: '96px',
                   borderRadius: '50%',
                   objectFit: 'cover',
-                  border: '2.5px solid var(--gold-border)',
+                  border: '2.5px solid #E5E7EB',
                   marginBottom: '1.2rem',
                   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                 }}
                 onMouseEnter={(e) => {
                   e.target.style.transform = 'scale(1.08)';
-                  e.target.style.boxShadow = '0 8px 24px rgba(201,169,97,0.25)';
+                  e.target.style.boxShadow = '0 8px 24px rgba(201,161,74,0.2)';
                 }}
                 onMouseLeave={(e) => {
                   e.target.style.transform = 'scale(1)';
@@ -74,14 +74,14 @@ function Team() {
                 width: '96px',
                 height: '96px',
                 borderRadius: '50%',
-                background: 'linear-gradient(135deg, var(--gold-dim), var(--bg-elevated))',
+                background: 'linear-gradient(135deg, var(--gold-dim), var(--bg-light))',
                 margin: '0 auto 1.2rem',
-                border: '2px solid var(--gold-border)',
+                border: '2px solid #E5E7EB',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: '2rem',
-                color: 'var(--gold)',
+                color: 'var(--navy)',
                 fontFamily: 'var(--font-heading)',
               }}>
                 {m.name.charAt(5)}

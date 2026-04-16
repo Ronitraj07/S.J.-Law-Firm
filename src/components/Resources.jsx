@@ -23,7 +23,7 @@ function Resources() {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="section" id="resources">
+    <section className="section section-alt" id="resources">
       <div className="animate-fadeInUp">
         <p className="section-label">Knowledge Base</p>
         <h2 style={{ marginBottom: '0.5rem' }}>Legal Guides &amp; Resources</h2>
@@ -42,7 +42,7 @@ function Resources() {
               key={i}
               className={`animate-fadeInUp delay-${(i + 1) * 100}`}
               style={{
-                borderBottom: '1px solid var(--gold-border)',
+                borderBottom: '1px solid #E5E7EB',
                 padding: '1.2rem 0',
               }}
             >
@@ -61,7 +61,7 @@ function Resources() {
                   gap: '1rem',
                 }}
               >
-                <h3 style={{ color: isOpen ? 'var(--gold)' : 'var(--text-primary)', transition: 'color 0.25s ease', margin: 0 }}>
+                <h3 style={{ color: isOpen ? 'var(--gold)' : 'var(--navy)', transition: 'color 0.25s ease', margin: 0 }}>
                   {faq.question}
                 </h3>
                 <span style={{

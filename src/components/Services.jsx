@@ -57,7 +57,7 @@ const services = [
 
 function Services() {
   return (
-    <section className="section" id="services">
+    <section className="section section-alt" id="services">
       <div className="animate-fadeInUp">
         <p className="section-label">What We Do</p>
         <h2 style={{ marginBottom: '0.5rem' }}>Core Areas of Practice</h2>
@@ -82,11 +82,10 @@ function Services() {
             <div style={{
               color: 'var(--gold)',
               marginBottom: '1rem',
-              opacity: 0.8,
             }}>
               {s.icon}
             </div>
-            <h3 style={{ color: 'var(--gold)', marginBottom: '0.6rem' }}>{s.title}</h3>
+            <h3 style={{ color: 'var(--navy)', marginBottom: '0.6rem' }}>{s.title}</h3>
             <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{s.desc}</p>
           </article>
         ))}
