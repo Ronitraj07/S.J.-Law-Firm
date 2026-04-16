@@ -30,6 +30,7 @@ function Navbar() {
             S. &amp; J. Associates
           </span>
         </Link>
+
         <div className="nav-links">
           <NavLink to="/" end style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : undefined })}>Home</NavLink>
           <NavLink to="/services" style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : undefined })}>Services</NavLink>
@@ -37,6 +38,10 @@ function Navbar() {
           <NavLink to="/resources" style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : undefined })}>Resources</NavLink>
           <NavLink to="/contact" style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : undefined })}>Contact</NavLink>
         </div>
+
+        <Link to="/contact" className="nav-cta">
+          Book Consultation
+        </Link>
       </div>
     </nav>
   );

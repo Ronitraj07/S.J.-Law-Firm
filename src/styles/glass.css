@@ -125,6 +125,30 @@
   width: 100%;
 }
 
+/* ---------- Navbar CTA ---------- */
+.nav-cta {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  background: transparent;
+  color: var(--gold);
+  border: 1.5px solid var(--gold);
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-cta:hover {
+  background: var(--gold);
+  color: #ffffff;
+}
+
 @media (max-width: 768px) {
   .nav-inner {
     flex-direction: column;
@@ -137,6 +161,12 @@
     justify-content: center;
     gap: 0.6rem 1rem;
     font-size: 0.75rem;
+  }
+
+  .nav-cta {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 1rem;
   }
 }
 
