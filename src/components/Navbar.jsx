@@ -4,46 +4,35 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="nav-inner">
-        <a 
-          href="#home" 
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '0.8rem',
-            textDecoration: 'none',
-            transition: 'transform 0.3s ease'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-        >
-          <img 
+        <a href="#home" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
+          <img
             src={logo}
             alt="S. & J. Associates Logo"
-            style={{ 
-              height: 'clamp(40px, 5vw, 50px)', 
+            style={{
+              height: 'clamp(36px, 4vw, 44px)',
               width: 'auto',
               objectFit: 'contain',
-              borderRadius: '8px',
-              border: '2px solid rgba(201,169,97,0.4)',
-              boxShadow: '0 4px 12px rgba(201,169,97,0.2), 0 2px 4px rgba(0,0,0,0.8)',
-              padding: '6px',
-              background: 'rgba(13,13,13,0.8)'
-            }} 
+              borderRadius: '6px',
+              border: '1.5px solid var(--gold-border)',
+              padding: '4px',
+              background: 'var(--bg-card)'
+            }}
           />
-          <div style={{ 
-            fontWeight: 700, 
-            letterSpacing: "0.08em", 
-            fontSize: "clamp(0.8rem, 2vw, 0.95rem)", 
-            color: "#c9a961",
-            fontFamily: 'Georgia, serif'
+          <span style={{
+            fontWeight: 700,
+            letterSpacing: '0.1em',
+            fontSize: 'clamp(0.7rem, 1.8vw, 0.85rem)',
+            color: 'var(--gold)',
+            fontFamily: 'var(--font-heading)',
+            textTransform: 'uppercase'
           }}>
-            S. &amp; J. ASSOCIATES (Law Firm)
-          </div>
+            S. &amp; J. Associates
+          </span>
         </a>
         <div className="nav-links">
           <a href="#home">Home</a>
           <a href="#services">Services</a>
-          <a href="#team">Our Team</a>
+          <a href="#team">Team</a>
           <a href="#resources">Resources</a>
           <a href="#contact">Contact</a>
         </div>

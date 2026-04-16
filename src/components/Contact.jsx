@@ -17,156 +17,68 @@ function Contact() {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(
-        () => {
-          setStatus("sent");
-          formRef.current.reset();
-        },
-        () => {
-          setStatus("error");
-        }
+        () => { setStatus("sent"); formRef.current.reset(); },
+        () => { setStatus("error"); }
       );
   };
 
   return (
     <section className="section" id="contact">
-      <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 1.9rem)', marginBottom: '1rem', fontFamily: 'Georgia, serif' }}>
-        Contact us
-      </h2>
-      <div
-        className="glass-card"
-        style={{
-          padding: 'clamp(1.5rem, 3vw, 2.5rem)',
-          borderRadius: '18px',
-          display: 'grid',
-          gap: '2.5rem',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        }}
-      >
-        <div>
-          <h3 style={{ fontSize: '1.15rem', marginBottom: '0.8rem', color: '#c9a961', fontFamily: 'Georgia, serif' }}>
-            Schedule a confidential consultation
+      <div className="animate-fadeInUp">
+        <p className="section-label">Get in Touch</p>
+        <h2 style={{ marginBottom: '0.5rem' }}>Contact Us</h2>
+        <div className="divider" />
+      </div>
+
+      <div className="glass-card" style={{
+        padding: 'clamp(1.8rem, 4vw, 3rem)',
+        display: 'grid',
+        gap: '3rem',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      }}>
+        {/* Info */}
+        <div className="animate-slideInLeft">
+          <h3 style={{ color: 'var(--gold)', marginBottom: '0.8rem' }}>
+            Schedule a Confidential Consultation
           </h3>
-          <p style={{ fontSize: '0.95rem', color: '#e5e7eb', marginBottom: '1.2rem', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', marginBottom: '1.8rem', lineHeight: 1.7 }}>
             Share a brief overview of your matter. Our team will review your request and reach out
             with available slots.
           </p>
-          <div style={{ fontSize: '0.92rem', color: '#a8a8a8', lineHeight: 1.9 }}>
-            <p style={{ marginBottom: '0.3rem' }}><strong style={{ color: '#c9a961' }}>Phone (Rituraj Sinha):</strong> +91 82003 80901</p>
-            <p style={{ marginBottom: '0.3rem' }}><strong style={{ color: '#c9a961' }}>Phone (Swati Verma):</strong> +91 88004 13165</p>
-            <p style={{ marginBottom: '0.3rem' }}><strong style={{ color: '#c9a961' }}>Phone (Abhishek Verma):</strong> +91 98710 12151</p>
-            <p style={{ marginBottom: '0.3rem' }}><strong style={{ color: '#c9a961' }}>Email:</strong> contact@sjassociates.com</p>
-            <p><strong style={{ color: '#c9a961' }}>Address:</strong> [Add office address / city here]</p>
+          <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 2.2 }}>
+            <p><strong style={{ color: 'var(--gold)', fontWeight: 600 }}>Rituraj Sinha:</strong> +91 82003 80901</p>
+            <p><strong style={{ color: 'var(--gold)', fontWeight: 600 }}>Swati Verma:</strong> +91 88004 13165</p>
+            <p><strong style={{ color: 'var(--gold)', fontWeight: 600 }}>Abhishek Verma:</strong> +91 98710 12151</p>
+            <p style={{ marginTop: '0.5rem' }}><strong style={{ color: 'var(--gold)', fontWeight: 600 }}>Email:</strong> contact@sjassociates.com</p>
           </div>
         </div>
 
-        <form ref={formRef} onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.1rem' }}>
+        {/* Form */}
+        <form ref={formRef} onSubmit={handleSubmit} className="animate-slideInRight" style={{ display: 'grid', gap: '1.1rem' }}>
           <div>
-            <label style={{ fontSize: '0.9rem', fontWeight: 600, color: '#c9a961', display: 'block', marginBottom: '0.4rem' }}>
-              Full name
-            </label>
-            <input
-              name="from_name"
-              required
-              style={{
-                width: '100%',
-                borderRadius: '10px',
-                border: '1px solid rgba(201,169,97,0.4)',
-                padding: '0.75rem 1rem',
-                background: 'rgba(13,13,13,0.9)',
-                color: '#e5e7eb',
-                fontSize: '0.95rem',
-                outline: 'none',
-                transition: 'border-color 0.3s ease',
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#c9a961'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(201,169,97,0.4)'}
-            />
+            <label className="form-label">Full Name</label>
+            <input name="from_name" required className="form-input" />
           </div>
           <div>
-            <label style={{ fontSize: '0.9rem', fontWeight: 600, color: '#c9a961', display: 'block', marginBottom: '0.4rem' }}>
-              Email
-            </label>
-            <input
-              type="email"
-              name="user_email"
-              required
-              style={{
-                width: '100%',
-                borderRadius: '10px',
-                border: '1px solid rgba(201,169,97,0.4)',
-                padding: '0.75rem 1rem',
-                background: 'rgba(13,13,13,0.9)',
-                color: '#e5e7eb',
-                fontSize: '0.95rem',
-                outline: 'none',
-                transition: 'border-color 0.3s ease',
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#c9a961'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(201,169,97,0.4)'}
-            />
+            <label className="form-label">Email</label>
+            <input type="email" name="user_email" required className="form-input" />
           </div>
           <div>
-            <label style={{ fontSize: '0.9rem', fontWeight: 600, color: '#c9a961', display: 'block', marginBottom: '0.4rem' }}>
-              Subject
-            </label>
-            <input
-              name="subject"
-              style={{
-                width: '100%',
-                borderRadius: '10px',
-                border: '1px solid rgba(201,169,97,0.4)',
-                padding: '0.75rem 1rem',
-                background: 'rgba(13,13,13,0.9)',
-                color: '#e5e7eb',
-                fontSize: '0.95rem',
-                outline: 'none',
-                transition: 'border-color 0.3s ease',
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#c9a961'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(201,169,97,0.4)'}
-            />
+            <label className="form-label">Subject</label>
+            <input name="subject" className="form-input" />
           </div>
           <div>
-            <label style={{ fontSize: '0.9rem', fontWeight: 600, color: '#c9a961', display: 'block', marginBottom: '0.4rem' }}>
-              Message
-            </label>
-            <textarea
-              name="message"
-              rows={5}
-              required
-              style={{
-                width: '100%',
-                borderRadius: '10px',
-                border: '1px solid rgba(201,169,97,0.4)',
-                padding: '0.75rem 1rem',
-                background: 'rgba(13,13,13,0.9)',
-                color: '#e5e7eb',
-                fontSize: '0.95rem',
-                resize: 'vertical',
-                outline: 'none',
-                transition: 'border-color 0.3s ease',
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#c9a961'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(13,13,13,0.9)'}
-            />
+            <label className="form-label">Message</label>
+            <textarea name="message" rows={5} required className="form-input" style={{ resize: 'vertical' }} />
           </div>
-          <button 
-            type="submit" 
-            className="btn-primary" 
-            disabled={status === "sending"}
-            style={{ marginTop: '0.5rem' }}
-          >
-            {status === "sending" ? "Sending..." : "Send message"}
+          <button type="submit" className="btn-primary" disabled={status === "sending"} style={{ marginTop: '0.5rem' }}>
+            {status === "sending" ? "Sending…" : "Send Message"}
           </button>
           {status === "sent" && (
-            <p style={{ fontSize: '0.88rem', color: '#86efac', textAlign: 'center' }}>
-              ✓ Message sent successfully.
-            </p>
+            <p style={{ fontSize: '0.88rem', color: '#86efac', textAlign: 'center' }}>✓ Message sent successfully.</p>
           )}
           {status === "error" && (
-            <p style={{ fontSize: '0.88rem', color: '#fca5a5', textAlign: 'center' }}>
-              ✗ Something went wrong. Please try again.
-            </p>
+            <p style={{ fontSize: '0.88rem', color: '#fca5a5', textAlign: 'center' }}>Something went wrong. Please try again.</p>
           )}
         </form>
       </div>
