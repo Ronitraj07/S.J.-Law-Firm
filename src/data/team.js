@@ -9,7 +9,7 @@ export const teamMembers = [
     yearsOfPractice: 8,
     barCouncil: {
       name: "Bar Council of Gujarat",
-      enrollmentNumber: "GUJ/XXXX/XXXX",
+      enrollmentNumber: "G/2005/2016",
     },
     education: [
       {
@@ -39,7 +39,7 @@ export const teamMembers = [
     yearsOfPractice: 6,
     barCouncil: {
       name: "Bar Council of Delhi",
-      enrollmentNumber: "D/XXXX/XXXX",
+      enrollmentNumber: "D/5041/2017",
     },
     education: [
       {
@@ -76,7 +76,7 @@ export const teamMembers = [
     yearsOfPractice: 7,
     barCouncil: {
       name: "Bar Council of Delhi",
-      enrollmentNumber: "D/XXXX/XXXX",
+      enrollmentNumber: "D/5449/2022",
     },
     education: [
       {

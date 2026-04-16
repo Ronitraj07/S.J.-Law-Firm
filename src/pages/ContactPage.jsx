@@ -57,11 +57,15 @@ function ContactPage() {
 
             <div className="glass-card" style={{ padding: '1.8rem' }}>
               <h2 style={{ fontSize: '1rem', marginBottom: '1.2rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.6rem' }}>Office</h2>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.9 }}>
                 S. &amp; J. Associates<br />
-                New Delhi, India
+                325 Broadway Empire,<br />
+                Vasan Bhayli Main Road,<br />
+                Near Nilamber Circle,<br />
+                Vadodara &mdash; 391410,<br />
+                Gujarat, India
               </p>
-              <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: '0.8rem' }}>contact@sjassociates.com</p>
+              <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: '1rem' }}>contact@sjassociates.com</p>
             </div>
           </div>
 
