@@ -6,16 +6,16 @@ export const teamMembers = [
     phone: "+91 82003 80901",
     email: "rituraj@sjassociates.com",
     photo: "/team/rituraj.jpg",
-    yearsOfPractice: 8,
+    yearsOfPractice: 9,
     barCouncil: {
       name: "Bar Council of Gujarat",
       enrollmentNumber: "G/2005/2016",
     },
     education: [
       {
-        degree: "B.A. LL.B (Hons.)",
-        institution: "Maharaja Sayajirao University of Baroda",
-        year: "XXXX",
+        degree: "B.A. LL.B",
+        institution: "Baroda School of Legal Studies, Maharaja Sayajirao University of Baroda",
+        year: "2016",
       },
     ],
     courts: [
@@ -36,7 +36,7 @@ export const teamMembers = [
     phone: "+91 88004 13165",
     email: "swati@sjassociates.com",
     photo: "/team/swati.jpg",
-    yearsOfPractice: 6,
+    yearsOfPractice: 8,
     barCouncil: {
       name: "Bar Council of Delhi",
       enrollmentNumber: "D/5041/2017",
@@ -45,12 +45,12 @@ export const teamMembers = [
       {
         degree: "Bachelor of Laws — LL.B",
         institution: "Guru Gobind Singh Indraprastha University",
-        year: "XXXX",
+        year: "2017",
       },
       {
         degree: "Master of Laws — LL.M (Criminology & Security Law)",
-        institution: "Guru Gobind Singh Indraprastha University",
-        year: "XXXX",
+        institution: "Parul University",
+        year: "2021",
       },
     ],
     courts: [
@@ -73,7 +73,7 @@ export const teamMembers = [
     phone: "+91 98710 12151",
     email: "abhishek@sjassociates.com",
     photo: "/team/abhishek.jpg",
-    yearsOfPractice: 7,
+    yearsOfPractice: 4,
     barCouncil: {
       name: "Bar Council of Delhi",
       enrollmentNumber: "D/5449/2022",
@@ -82,7 +82,7 @@ export const teamMembers = [
       {
         degree: "Bachelor of Laws — LL.B",
         institution: "Guru Gobind Singh Indraprastha University",
-        year: "XXXX",
+        year: "2022",
       },
     ],
     courts: [
