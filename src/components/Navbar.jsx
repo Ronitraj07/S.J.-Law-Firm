@@ -1,10 +1,11 @@
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 function Navbar() {
   return (
     <nav className="navbar">
       <div className="nav-inner">
-        <a href="#home" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
           <img
             src={logo}
             alt="S. & J. Associates Logo"
@@ -28,13 +29,23 @@ function Navbar() {
           }}>
             S. &amp; J. Associates
           </span>
-        </a>
+        </Link>
         <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#services">Services</a>
-          <a href="#team">Team</a>
-          <a href="#resources">Resources</a>
-          <a href="#contact">Contact</a>
+          <NavLink to="/" end style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : undefined })}>
+            Home
+          </NavLink>
+          <NavLink to="/services" style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : undefined })}>
+            Services
+          </NavLink>
+          <NavLink to="/team" style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : undefined })}>
+            Team
+          </NavLink>
+          <NavLink to="/resources" style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : undefined })}>
+            Resources
+          </NavLink>
+          <NavLink to="/contact" style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : undefined })}>
+            Contact
+          </NavLink>
         </div>
       </div>
     </nav>
