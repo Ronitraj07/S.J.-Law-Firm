@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
+import AccreditationsBar from '../components/AccreditationsBar';
 import { services } from '../data/services';
 import { teamMembers } from '../data/team';
 import heroBg from '../assets/images/hero-bg.jpg';
@@ -34,11 +35,14 @@ function HomePage() {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Hero — reuse existing component */}
+      {/* Hero */}
       <Hero />
 
+      {/* Accreditations Bar */}
+      <AccreditationsBar />
+
       {/* Stats Counter */}
-      <section style={{ background: 'var(--navy)', borderTop: '1px solid rgba(201,161,74,0.2)', borderBottom: '1px solid rgba(201,161,74,0.2)' }}>
+      <section style={{ background: 'var(--navy)', borderBottom: '1px solid rgba(201,161,74,0.2)' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
           <StatCounter value={`${combinedYears}+`} label="Combined Years of Practice" />
           <StatCounter value={`${services.length}`} label="Practice Areas" />
