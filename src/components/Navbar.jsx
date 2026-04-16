@@ -13,16 +13,16 @@ function Navbar() {
               width: 'auto',
               objectFit: 'contain',
               borderRadius: '6px',
-              border: '1.5px solid var(--gold-border)',
+              border: '1.5px solid #E5E7EB',
               padding: '4px',
-              background: 'var(--bg-card)'
+              background: '#FFFFFF'
             }}
           />
           <span style={{
             fontWeight: 700,
             letterSpacing: '0.1em',
             fontSize: 'clamp(0.7rem, 1.8vw, 0.85rem)',
-            color: 'var(--gold)',
+            color: 'var(--navy)',
             fontFamily: 'var(--font-heading)',
             textTransform: 'uppercase'
           }}>

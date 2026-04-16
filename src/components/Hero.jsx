@@ -14,14 +14,14 @@ function Hero() {
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            opacity: 0.18,
-            filter: 'grayscale(60%) brightness(0.6)',
+            opacity: 0.12,
+            filter: 'grayscale(40%)',
           }}
         />
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(6,8,10,0.88) 0%, rgba(6,8,10,0.96) 100%)',
+          background: 'linear-gradient(180deg, rgba(26,42,68,0.92) 0%, rgba(26,42,68,0.97) 100%)',
         }} />
       </div>
 
@@ -34,13 +34,13 @@ function Hero() {
         }}>
           {/* Left content */}
           <div className="animate-slideInLeft">
-            <p className="section-label">S. &amp; J. Associates • Legal Services</p>
-            <h1 style={{ marginBottom: '1.5rem' }}>
+            <p className="section-label" style={{ color: 'var(--gold)' }}>S. &amp; J. Associates • Legal Services</p>
+            <h1 style={{ marginBottom: '1.5rem', color: '#FFFFFF' }}>
               Client‑focused, practical &amp; result‑driven legal solutions.
             </h1>
             <div className="divider" />
             <p style={{
-              color: 'var(--text-secondary)',
+              color: 'rgba(255,255,255,0.75)',
               maxWidth: '36rem',
               fontSize: 'clamp(0.92rem, 2vw, 1.02rem)',
               lineHeight: 1.75,
@@ -50,25 +50,28 @@ function Hero() {
             </p>
             <div style={{ marginTop: '2.2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <a href="#contact"><button className="btn-primary">Book a Consultation</button></a>
-              <a href="#services"><button className="btn-outline">Our Practice Areas</button></a>
+              <a href="#services"><button className="btn-outline" style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.4)' }}>Our Practice Areas</button></a>
             </div>
           </div>
 
           {/* Right card */}
           <div className="animate-slideInRight" style={{ display: 'flex', justifyContent: 'center' }}>
-            <div className="glass-card" style={{
+            <div style={{
               padding: '2.2rem 2rem',
               width: '100%',
               maxWidth: '360px',
-              background: 'radial-gradient(ellipse at top left, rgba(201,169,97,0.08), var(--bg-card))',
+              background: 'rgba(255,255,255,0.08)',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              backdropFilter: 'blur(16px)',
             }}>
               <p style={{ fontSize: '0.8rem', color: 'var(--gold)', marginBottom: '0.6rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-body)' }}>
                 Speak with our team
               </p>
-              <p style={{ fontWeight: 600, fontSize: '1.15rem', marginBottom: '1.2rem', color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+              <p style={{ fontWeight: 600, fontSize: '1.15rem', marginBottom: '1.2rem', color: '#FFFFFF', fontFamily: 'var(--font-heading)' }}>
                 Professional. Practical. Reliable.
               </p>
-              <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 2 }}>
+              <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)', lineHeight: 2 }}>
                 <p>Rituraj Sinha — +91 82003 80901</p>
                 <p>Swati Verma — +91 88004 13165</p>
                 <p>Abhishek Verma — +91 98710 12151</p>

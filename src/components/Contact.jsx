@@ -23,7 +23,7 @@ function Contact() {
   };
 
   return (
-    <section className="section" id="contact">
+    <section className="section section-alt" id="contact">
       <div className="animate-fadeInUp">
         <p className="section-label">Get in Touch</p>
         <h2 style={{ marginBottom: '0.5rem' }}>Contact Us</h2>
@@ -38,7 +38,7 @@ function Contact() {
       }}>
         {/* Info */}
         <div className="animate-slideInLeft">
-          <h3 style={{ color: 'var(--gold)', marginBottom: '0.8rem' }}>
+          <h3 style={{ color: 'var(--navy)', marginBottom: '0.8rem' }}>
             Schedule a Confidential Consultation
           </h3>
           <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', marginBottom: '1.8rem', lineHeight: 1.7 }}>
@@ -46,10 +46,10 @@ function Contact() {
             with available slots.
           </p>
           <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 2.2 }}>
-            <p><strong style={{ color: 'var(--gold)', fontWeight: 600 }}>Rituraj Sinha:</strong> +91 82003 80901</p>
-            <p><strong style={{ color: 'var(--gold)', fontWeight: 600 }}>Swati Verma:</strong> +91 88004 13165</p>
-            <p><strong style={{ color: 'var(--gold)', fontWeight: 600 }}>Abhishek Verma:</strong> +91 98710 12151</p>
-            <p style={{ marginTop: '0.5rem' }}><strong style={{ color: 'var(--gold)', fontWeight: 600 }}>Email:</strong> contact@sjassociates.com</p>
+            <p><strong style={{ color: 'var(--navy)', fontWeight: 600 }}>Rituraj Sinha:</strong> +91 82003 80901</p>
+            <p><strong style={{ color: 'var(--navy)', fontWeight: 600 }}>Swati Verma:</strong> +91 88004 13165</p>
+            <p><strong style={{ color: 'var(--navy)', fontWeight: 600 }}>Abhishek Verma:</strong> +91 98710 12151</p>
+            <p style={{ marginTop: '0.5rem' }}><strong style={{ color: 'var(--navy)', fontWeight: 600 }}>Email:</strong> contact@sjassociates.com</p>
           </div>
         </div>
 
@@ -75,10 +75,10 @@ function Contact() {
             {status === "sending" ? "Sending…" : "Send Message"}
           </button>
           {status === "sent" && (
-            <p style={{ fontSize: '0.88rem', color: '#86efac', textAlign: 'center' }}>✓ Message sent successfully.</p>
+            <p style={{ fontSize: '0.88rem', color: '#16a34a', textAlign: 'center' }}>✓ Message sent successfully.</p>
           )}
           {status === "error" && (
-            <p style={{ fontSize: '0.88rem', color: '#fca5a5', textAlign: 'center' }}>Something went wrong. Please try again.</p>
+            <p style={{ fontSize: '0.88rem', color: '#dc2626', textAlign: 'center' }}>Something went wrong. Please try again.</p>
           )}
         </form>
       </div>

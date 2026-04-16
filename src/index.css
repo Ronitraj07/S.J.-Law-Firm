@@ -4,32 +4,35 @@
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
 
-  --gold: #c9a961;
-  --gold-light: #d4b76d;
-  --gold-dim: rgba(201, 169, 97, 0.15);
-  --gold-border: rgba(201, 169, 97, 0.25);
-  --gold-glow: rgba(201, 169, 97, 0.35);
+  --navy: #1A2A44;
+  --navy-light: #243656;
+  --gold: #C9A14A;
+  --gold-light: #d4b265;
+  --gold-dim: rgba(201, 161, 74, 0.1);
+  --gold-border: rgba(201, 161, 74, 0.25);
+  --gold-glow: rgba(201, 161, 74, 0.35);
 
-  --bg-deep: #06080a;
-  --bg-card: rgba(12, 14, 18, 0.88);
-  --bg-elevated: rgba(18, 20, 26, 0.92);
+  --bg-white: #FFFFFF;
+  --bg-light: #F4F6F8;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F9FAFB;
 
-  --text-primary: #f0f0f0;
-  --text-secondary: #c4c4c4;
-  --text-muted: #8a8a8a;
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
 
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
 
-  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 12px 40px rgba(201, 169, 97, 0.12);
+  --shadow-card: 0 4px 24px rgba(26, 42, 68, 0.08);
+  --shadow-glow: 0 8px 32px rgba(201, 161, 74, 0.12);
 
   font-family: var(--font-body);
   line-height: 1.65;
   font-weight: 400;
   color: var(--text-primary);
-  background-color: var(--bg-deep);
+  background-color: var(--bg-white);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -50,41 +53,24 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
-  background: var(--bg-deep);
+  background: var(--bg-white);
   position: relative;
-}
-
-/* Subtle grid texture overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(201,169,97,0.015) 80px, rgba(201,169,97,0.015) 81px),
-    repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(201,169,97,0.015) 80px, rgba(201,169,97,0.015) 81px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-body > * {
-  position: relative;
-  z-index: 1;
 }
 
 a {
   font-weight: 500;
-  color: var(--gold);
+  color: var(--navy);
   text-decoration: none;
   transition: color 0.25s ease;
 }
 
 a:hover {
-  color: var(--gold-light);
+  color: var(--gold);
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  color: var(--text-primary);
+  color: var(--navy);
   font-weight: 600;
   letter-spacing: -0.01em;
 }
@@ -115,6 +101,6 @@ input, textarea {
 }
 
 ::selection {
-  background: rgba(201, 169, 97, 0.3);
-  color: #fff;
+  background: rgba(201, 161, 74, 0.25);
+  color: var(--navy);
 }
