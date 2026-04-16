@@ -52,14 +52,6 @@ function Footer() {
           ))}
         </nav>
 
-        {/* BCI Mandatory Disclaimer */}
-        <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.7, maxWidth: '680px', marginTop: '0.4rem' }}>
-          This website is for informational purposes only and does not constitute legal advice. No attorney-client
-          relationship is established by use of this site or by submitting the contact form. The rules of the Bar
-          Council of India prohibit law firms from soliciting work or advertising in any manner. By accessing this
-          website, you acknowledge that you are seeking information of your own accord and free will.
-        </p>
-
         <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.35)', marginTop: '0.2rem' }}>
           &copy; {new Date().getFullYear()} S. &amp; J. Associates. All rights reserved.
         </p>
