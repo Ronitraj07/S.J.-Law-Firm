@@ -26,7 +26,7 @@ function TeamMemberPage() {
   const phoneRaw = member.phone.replace(/\s+/g, '');
   const waNumber = phoneRaw.replace('+', '');
   const waMessage = encodeURIComponent(`Hello ${member.name}, I would like to schedule a consultation.`);
-  const waHref = `https://wa.me/${waNumber}?text=${waMessage}`;
+  const waHref = `https://api.whatsapp.com/send?phone=${waNumber}&text=${waMessage}&lang=en`;
   const callHref = `tel:${phoneRaw}`;
 
   return (
@@ -112,17 +112,6 @@ function TeamMemberPage() {
               <h2 style={{ fontSize: '1rem', marginBottom: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.6rem' }}>Bar Enrolment</h2>
               <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '0.3rem' }}>{member.barCouncil.name}</p>
               <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)' }}>Enrolment No. {member.barCouncil.enrollmentNumber}</p>
-            </div>
-            <div className="glass-card" style={{ padding: '1.8rem' }}>
-              <h2 style={{ fontSize: '1rem', marginBottom: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.6rem' }}>Practices Before</h2>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {member.courts.map(court => (
-                  <li key={court} style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--gold)', flexShrink: 0, display: 'inline-block' }} />
-                    {court}
-                  </li>
-                ))}
-              </ul>
             </div>
             <div className="glass-card" style={{ padding: '1.8rem' }}>
               <h2 style={{ fontSize: '1rem', marginBottom: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.6rem' }}>Get in Touch</h2>
