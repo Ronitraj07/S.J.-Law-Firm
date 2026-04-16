@@ -81,13 +81,13 @@ function ContactPage() {
               <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: '1rem' }}>contact@sjassociates.com</p>
             </div>
 
-            {/* Google Map */}
+            {/* Google Map — verified embed */}
             <div className="glass-card" style={{ overflow: 'hidden', borderRadius: 'var(--radius-lg)' }}>
               <iframe
                 title="S. & J. Associates Office Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.847!2d73.1234!3d22.2587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDE1JzMxLjMiTiA3M8KwMDcnMjQuMiJF!5e0!3m2!1sen!2sin!4v1713000000000!5m2!1sen!2sin&q=Broadway+Empire,+Vasan+Bhayli+Main+Road,+Nilamber+Circle,+Vadodara,+Gujarat+391410"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228.01181874296915!2d73.13110983174553!3d22.298880724179348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc56a595a6547%3A0xa762398f19877c44!2sS.%20%26%20J.%20Associates%20(Law%20Firm)!5e1!3m2!1sen!2sin!4v1776352032603!5m2!1sen!2sin"
                 width="100%"
-                height="220"
+                height="240"
                 style={{ border: 0, display: 'block' }}
                 allowFullScreen
                 loading="lazy"
