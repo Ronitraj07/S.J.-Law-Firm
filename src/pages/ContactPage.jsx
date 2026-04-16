@@ -81,11 +81,11 @@ function ContactPage() {
               <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: '1rem' }}>contact@sjassociates.com</p>
             </div>
 
-            {/* Google Map — verified embed */}
+            {/* Google Map */}
             <div className="glass-card" style={{ overflow: 'hidden', borderRadius: 'var(--radius-lg)' }}>
               <iframe
                 title="S. & J. Associates Office Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228.01181874296915!2d73.13110983174553!3d22.298880724179348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc56a595a6547%3A0xa762398f19877c44!2sS.%20%26%20J.%20Associates%20(Law%20Firm)!5e1!3m2!1sen!2sin!4v1776352032603!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47900.406695787635!2d73.1423232113653!3d22.312206561114483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc56a595a6547%3A0xa762398f19877c44!2sS.%20%26%20J.%20Associates%20(Law%20Firm)!5e0!3m2!1sen!2sin!4v1776354309772!5m2!1sen!2sin"
                 width="100%"
                 height="240"
                 style={{ border: 0, display: 'block' }}
