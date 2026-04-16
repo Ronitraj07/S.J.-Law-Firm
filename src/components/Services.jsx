@@ -2,152 +2,92 @@ const services = [
   {
     title: "Litigation",
     desc: "Comprehensive representation in civil and commercial litigation before courts and tribunals, from pre‑litigation strategy to final resolution.",
-    icon: "⚖️"
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+      </svg>
+    ),
   },
   {
-    title: "Corporate & Commercial Matters",
+    title: "Corporate & Commercial",
     desc: "Advisory and drafting support on commercial contracts, corporate transactions and day‑to‑day business legal needs.",
-    icon: "🏛️"
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
+      </svg>
+    ),
   },
   {
     title: "Arbitration",
     desc: "Assistance in domestic arbitration, including drafting of arbitration agreements, representation in arbitral proceedings and enforcement of awards.",
-    icon: "🤝"
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+    ),
   },
   {
     title: "Data Privacy Compliance",
     desc: "Data privacy compliance support, policies and documentation for businesses seeking to align with applicable privacy regulations.",
-    icon: "🔒"
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    ),
   },
   {
     title: "Legal Documentation",
     desc: "Drafting and vetting of agreements, deeds, policies and other legal documentation tailored to your commercial and personal requirements.",
-    icon: "📄"
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+    ),
   },
   {
     title: "Family & Consumer Disputes",
     desc: "Representation in family law and consumer disputes, focused on practical outcomes and dignified resolution of conflicts.",
-    icon: "👨‍👩‍👧"
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    ),
   },
 ];
 
 function Services() {
   return (
-    <section className="section" id="services" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Background Image Layer */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1
-      }}>
-        <div style={{
-          width: '100%',
-          height: '100%',
-          backgroundImage: 'url(/images/services-bg.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed', // Parallax effect
-          opacity: 0.08,
-          filter: 'grayscale(100%)'
-        }} />
-        {/* Dark overlay */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: 'linear-gradient(180deg, rgba(0,0,0,0.85), rgba(13,13,13,0.90))'
-        }} />
-      </div>
-
-      {/* Floating decorative icons */}
-      <div style={{
-        position: 'absolute',
-        top: '20%',
-        right: '10%',
-        fontSize: '60px',
-        opacity: 0.04,
-        animation: 'float 10s ease-in-out infinite',
-        pointerEvents: 'none'
-      }}>
-        📚
+    <section className="section" id="services">
+      <div className="animate-fadeInUp">
+        <p className="section-label">What We Do</p>
+        <h2 style={{ marginBottom: '0.5rem' }}>Core Areas of Practice</h2>
+        <div className="divider" />
+        <p className="section-subtitle">
+          S. &amp; J. Associates supports individuals and businesses across contentious and
+          non‑contentious work, with a focus on clear advice and effective dispute resolution.
+        </p>
       </div>
 
       <div style={{
-        position: 'absolute',
-        bottom: '10%',
-        left: '5%',
-        fontSize: '70px',
-        opacity: 0.03,
-        animation: 'float 12s ease-in-out infinite 3s',
-        pointerEvents: 'none'
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gap: '1.5rem',
       }}>
-        🏛️
-      </div>
-
-      <h2 className="animate-fadeInUp" style={{ fontSize: 'clamp(1.5rem, 3vw, 1.9rem)', marginBottom: '1rem', fontFamily: 'Georgia, serif' }}>
-        Core areas of practice
-      </h2>
-      <p
-        className="animate-fadeInUp delay-100"
-        style={{
-          color: '#a8a8a8',
-          maxWidth: '45rem',
-          fontSize: 'clamp(0.9rem, 2vw, 0.98rem)',
-          marginBottom: '2.5rem',
-          lineHeight: 1.6,
-        }}
-      >
-        S. &amp; J. Associates supports individuals and businesses across contentious and
-        non‑contentious work, with a focus on clear advice and effective dispute resolution.
-      </p>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1.5rem',
-        }}
-      >
-        {services.map((s, index) => (
+        {services.map((s, i) => (
           <article
             key={s.title}
-            className={`glass-card animate-scaleIn delay-${(index + 1) * 100}`}
-            style={{ 
-              padding: '1.8rem 1.6rem', 
-              borderRadius: '14px',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-5px)';
-              e.currentTarget.style.borderColor = 'rgba(201,169,97,0.6)';
-              e.currentTarget.querySelector('.service-icon').style.transform = 'scale(1.1) rotate(5deg)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.borderColor = 'rgba(201,169,97,0.35)';
-              e.currentTarget.querySelector('.service-icon').style.transform = 'scale(1) rotate(0deg)';
-            }}
+            className={`glass-card animate-scaleIn delay-${(i + 1) * 100}`}
+            style={{ padding: '2rem 1.8rem' }}
           >
-            <div 
-              className="service-icon"
-              style={{ 
-                fontSize: '2.5rem', 
-                marginBottom: '0.8rem',
-                opacity: 0.7,
-                transition: 'transform 0.3s ease'
-              }}
-            >
+            <div style={{
+              color: 'var(--gold)',
+              marginBottom: '1rem',
+              opacity: 0.8,
+            }}>
               {s.icon}
             </div>
-            <h3 style={{ fontSize: '1.15rem', marginBottom: '0.6rem', color: '#c9a961', fontFamily: 'Georgia, serif' }}>
-              {s.title}
-            </h3>
-            <p style={{ fontSize: '0.92rem', color: '#e5e7eb', lineHeight: 1.6 }}>{s.desc}</p>
+            <h3 style={{ color: 'var(--gold)', marginBottom: '0.6rem' }}>{s.title}</h3>
+            <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{s.desc}</p>
           </article>
         ))}
       </div>
