@@ -96,14 +96,14 @@ function Footer() {
 
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom bar — centered */}
         <div style={{
           paddingTop: '1.4rem',
           display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
+          flexDirection: 'column',
           alignItems: 'center',
-          gap: '0.5rem',
+          textAlign: 'center',
+          gap: '0.3rem',
         }}>
           <p style={{ fontSize: '0.76rem', color: 'rgba(255,255,255,0.28)' }}>
             &copy; {new Date().getFullYear()} S. &amp; J. Associates. All rights reserved.
