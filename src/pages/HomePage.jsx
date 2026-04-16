@@ -47,7 +47,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Practice Areas */}
+      {/* Practice Areas — condensed preview */}
       <section className="section">
         <div className="animate-fadeInUp">
           <p className="section-label">What We Do</p>
@@ -59,7 +59,7 @@ function HomePage() {
           </p>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-          {services.map((s, i) => (
+          {services.slice(0, 3).map((s, i) => (
             <Link
               key={s.slug}
               to={`/services/${s.slug}`}
@@ -77,6 +77,11 @@ function HomePage() {
               </article>
             </Link>
           ))}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+          <Link to="/services" className="btn-outline" style={{ textDecoration: 'none' }}>
+            View All Practice Areas
+          </Link>
         </div>
       </section>
 
@@ -105,7 +110,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Team Preview */}
+      {/* Team Preview — condensed */}
       <section className="section">
         <div className="animate-fadeInUp">
           <p className="section-label">Our People</p>
@@ -135,11 +140,7 @@ function HomePage() {
           ))}
         </div>
         <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-          <Link
-            to="/team"
-            className="btn-outline"
-            style={{ textDecoration: 'none' }}
-          >
+          <Link to="/team" className="btn-outline" style={{ textDecoration: 'none' }}>
             View All Advocates
           </Link>
         </div>
@@ -162,11 +163,7 @@ function HomePage() {
           <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '2rem', lineHeight: 1.75, fontSize: '0.95rem' }}>
             We offer an initial consultation to help you understand your legal position before you commit to any course of action.
           </p>
-          <Link
-            to="/contact"
-            className="btn-primary"
-            style={{ textDecoration: 'none' }}
-          >
+          <Link to="/contact" className="btn-primary" style={{ textDecoration: 'none' }}>
             Book a Consultation
           </Link>
         </div>

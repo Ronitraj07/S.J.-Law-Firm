@@ -3,7 +3,7 @@ import heroBg from '../assets/images/hero-bg.jpg';
 
 function Hero() {
   return (
-    <header id="home" style={{ position: 'relative', overflow: 'hidden' }}>
+    <header style={{ position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <img
           src={heroBg}
@@ -35,7 +35,7 @@ function Hero() {
           <div className="animate-slideInLeft">
             <p className="section-label" style={{ color: 'var(--gold)' }}>S. &amp; J. Associates • Legal Services</p>
             <h1 style={{ marginBottom: '1.5rem', color: '#FFFFFF' }}>
-              Client‑focused, practical &amp; result‑driven legal solutions.
+              Client&#8209;focused, practical &amp; result&#8209;driven legal solutions.
             </h1>
             <div className="divider" />
             <p style={{
@@ -45,23 +45,15 @@ function Hero() {
               lineHeight: 1.75,
             }}>
               We assist individuals and businesses with clear advice, strong representation and
-              reliable legal support in contentious and non‑contentious matters.
+              reliable legal support in contentious and non&#8209;contentious matters.
             </p>
             <div style={{ marginTop: '2.2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link
-                to="/contact"
-                className="btn-primary"
-                style={{ textDecoration: 'none' }}
-              >
+              <Link to="/contact" className="btn-primary" style={{ textDecoration: 'none' }}>
                 Book a Consultation
               </Link>
-              <a
-                href="#services"
-                className="btn-outline"
-                style={{ textDecoration: 'none', color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.4)' }}
-              >
+              <Link to="/services" className="btn-outline" style={{ textDecoration: 'none', color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.4)' }}>
                 Our Practice Areas
-              </a>
+              </Link>
             </div>
           </div>
 
