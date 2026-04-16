@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
@@ -9,21 +10,102 @@ import heroBg from '../assets/images/hero-bg.jpg';
 function StatCounter({ value, label }) {
   return (
     <div style={{ textAlign: 'center', padding: '1.5rem 1rem' }}>
-      <p style={{
-        fontSize: 'clamp(2rem, 4vw, 3rem)',
-        fontWeight: 700,
-        color: 'var(--gold)',
-        fontFamily: 'var(--font-heading)',
-        lineHeight: 1,
-        marginBottom: '0.5rem',
-      }}>{value}</p>
+      <p style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: 'var(--gold)', fontFamily: 'var(--font-heading)', lineHeight: 1, marginBottom: '0.5rem' }}>{value}</p>
       <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.65)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{label}</p>
+    </div>
+  );
+}
+
+function DisclaimerGate({ onAgree }) {
+  return (
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 99999,
+      background: 'rgba(10,18,30,0.92)',
+      backdropFilter: 'blur(6px)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: '1.5rem',
+    }}>
+      <div style={{
+        background: '#fff',
+        maxWidth: '640px', width: '100%',
+        borderRadius: '6px',
+        overflow: 'hidden',
+        boxShadow: '0 24px 64px rgba(0,0,0,0.5)',
+      }}>
+        {/* Header */}
+        <div style={{ background: 'var(--navy)', padding: '1.6rem 2rem', borderBottom: '3px solid var(--gold)' }}>
+          <p style={{ fontSize: '0.7rem', color: 'var(--gold)', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '0.4rem' }}>Important Notice</p>
+          <h2 style={{ color: '#fff', fontSize: '1.2rem', fontFamily: 'var(--font-heading)', margin: 0 }}>Disclaimer &amp; Confirmation</h2>
+        </div>
+
+        {/* Body */}
+        <div style={{ padding: '1.8rem 2rem' }}>
+          <p style={{ fontSize: '0.88rem', color: '#333', lineHeight: 1.75, marginBottom: '1.2rem' }}>
+            As per the rules of the Bar Council of India, we are not permitted to solicit work or advertise. By clicking <strong>"I Agree"</strong> below, you acknowledge the following:
+          </p>
+          <ul style={{ paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.65rem', marginBottom: '1.4rem' }}>
+            {[
+              'There has been no advertisement, solicitation, invitation or inducement of any sort from us or any of our members to solicit work through this website.',
+              'You wish to gain more information about us for your own information and use.',
+              'Any information obtained from this website is at your own volition and does not create a lawyer-client relationship.',
+              'We are not liable for any consequence of any action taken by you relying on information provided on this website.',
+            ].map((item, i) => (
+              <li key={i} style={{ fontSize: '0.85rem', color: '#444', lineHeight: 1.7 }}>{item}</li>
+            ))}
+          </ul>
+          <p style={{ fontSize: '0.82rem', color: '#666', lineHeight: 1.65, marginBottom: '0.5rem' }}>
+            If you have any legal issues, you must, in all cases, seek independent legal advice from a qualified advocate.
+          </p>
+        </div>
+
+        {/* Actions */}
+        <div style={{ padding: '1rem 2rem 1.8rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+          <button
+            onClick={onAgree}
+            style={{
+              padding: '0.65rem 2.2rem', borderRadius: '4px',
+              background: 'var(--navy)', color: '#fff',
+              border: '2px solid var(--navy)',
+              fontSize: '0.88rem', fontWeight: 700,
+              cursor: 'pointer', letterSpacing: '0.06em',
+              transition: 'background 0.2s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = '#0a1628'}
+            onMouseLeave={e => e.currentTarget.style.background = 'var(--navy)'}
+          >
+            I Agree
+          </button>
+          <button
+            onClick={() => { window.location.href = 'https://www.google.com'; }}
+            style={{
+              padding: '0.65rem 2.2rem', borderRadius: '4px',
+              background: 'transparent', color: 'var(--navy)',
+              border: '2px solid var(--navy)',
+              fontSize: '0.88rem', fontWeight: 700,
+              cursor: 'pointer', letterSpacing: '0.06em',
+            }}
+          >
+            I Disagree
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
 
 function HomePage() {
   const combinedYears = teamMembers.reduce((sum, m) => sum + m.yearsOfPractice, 0);
+  const [showGate, setShowGate] = useState(false);
+
+  useEffect(() => {
+    const agreed = sessionStorage.getItem('bci_agreed');
+    if (!agreed) setShowGate(true);
+  }, []);
+
+  const handleAgree = () => {
+    sessionStorage.setItem('bci_agreed', 'true');
+    setShowGate(false);
+  };
 
   return (
     <>
@@ -34,6 +116,8 @@ function HomePage() {
         <meta property="og:description" content="Practical, ethical and result-driven legal solutions across litigation, corporate, arbitration and family law." />
         <meta property="og:type" content="website" />
       </Helmet>
+
+      {showGate && <DisclaimerGate onAgree={handleAgree} />}
 
       <Hero />
       <AccreditationsBar />
@@ -47,7 +131,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Practice Areas — condensed preview */}
+      {/* Practice Areas */}
       <section className="section">
         <div className="animate-fadeInUp">
           <p className="section-label">What We Do</p>
@@ -60,11 +144,7 @@ function HomePage() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
           {services.slice(0, 3).map((s, i) => (
-            <Link
-              key={s.slug}
-              to={`/services/${s.slug}`}
-              style={{ textDecoration: 'none' }}
-            >
+            <Link key={s.slug} to={`/services/${s.slug}`} style={{ textDecoration: 'none' }}>
               <article
                 className={`glass-card animate-scaleIn delay-${(i % 3 + 1) * 100}`}
                 style={{ padding: '1.8rem', height: '100%', cursor: 'pointer', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}
@@ -79,9 +159,7 @@ function HomePage() {
           ))}
         </div>
         <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-          <Link to="/services" className="btn-outline" style={{ textDecoration: 'none' }}>
-            View All Practice Areas
-          </Link>
+          <Link to="/services" className="btn-outline" style={{ textDecoration: 'none' }}>View All Practice Areas</Link>
         </div>
       </section>
 
@@ -110,7 +188,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Team Preview — condensed */}
+      {/* Team Preview */}
       <section className="section">
         <div className="animate-fadeInUp">
           <p className="section-label">Our People</p>
@@ -125,9 +203,7 @@ function HomePage() {
                 style={{ padding: '2rem 1.8rem', textAlign: 'center', cursor: 'pointer' }}
               >
                 <img
-                  src={m.photo}
-                  alt={m.name}
-                  loading="lazy"
+                  src={m.photo} alt={m.name} loading="lazy"
                   style={{ width: '88px', height: '88px', borderRadius: '50%', objectFit: 'cover', border: '2.5px solid #E5E7EB', marginBottom: '1rem' }}
                   onError={e => { e.target.style.display = 'none'; }}
                 />
@@ -140,20 +216,12 @@ function HomePage() {
           ))}
         </div>
         <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-          <Link to="/team" className="btn-outline" style={{ textDecoration: 'none' }}>
-            View All Advocates
-          </Link>
+          <Link to="/team" className="btn-outline" style={{ textDecoration: 'none' }}>View All Advocates</Link>
         </div>
       </section>
 
       {/* CTA Banner */}
-      <section style={{
-        position: 'relative',
-        overflow: 'hidden',
-        padding: 'clamp(3rem, 6vw, 5rem) 2rem',
-        textAlign: 'center',
-        background: 'linear-gradient(180deg, rgba(26,42,68,0.97) 0%, rgba(26,42,68,1) 100%)',
-      }}>
+      <section style={{ position: 'relative', overflow: 'hidden', padding: 'clamp(3rem, 6vw, 5rem) 2rem', textAlign: 'center', background: 'linear-gradient(180deg, rgba(26,42,68,0.97) 0%, rgba(26,42,68,1) 100%)' }}>
         <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
           <img src={heroBg} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.06 }} />
         </div>
@@ -163,9 +231,7 @@ function HomePage() {
           <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '2rem', lineHeight: 1.75, fontSize: '0.95rem' }}>
             We offer an initial consultation to help you understand your legal position before you commit to any course of action.
           </p>
-          <Link to="/contact" className="btn-primary" style={{ textDecoration: 'none' }}>
-            Book a Consultation
-          </Link>
+          <Link to="/contact" className="btn-primary" style={{ textDecoration: 'none' }}>Book a Consultation</Link>
         </div>
       </section>
     </>
