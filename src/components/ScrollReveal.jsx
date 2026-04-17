@@ -1,26 +1,14 @@
 import { useEffect, useRef } from 'react';
 
-/**
- * ScrollReveal — wraps children and animates them into view
- * when they enter the viewport using IntersectionObserver.
- *
- * Props:
- *   animation  — CSS class from animations.css (default: 'fadeInUp')
- *   delay      — ms delay before the animation fires (default: 0)
- *   threshold  — how much of the element must be visible (default: 0.15)
- *   className  — extra class names to forward to the wrapper div
- *   style      — inline styles to forward to the wrapper div
- *   tag        — HTML tag for the wrapper (default: 'div')
- */
-function ScrollReveal({
-  children,
-  animation = 'fadeInUp',
-  delay = 0,
-  threshold = 0.15,
-  className = '',
-  style = {},
-  tag: Tag = 'div',
-}) {
+const animations = {
+  fadeUp:   { hidden: 'opacity:0;transform:translateY(28px)', visible: 'opacity:1;transform:translateY(0)' },
+  fadeIn:   { hidden: 'opacity:0', visible: 'opacity:1' },
+  fadeLeft: { hidden: 'opacity:0;transform:translateX(-28px)', visible: 'opacity:1;transform:translateX(0)' },
+  fadeRight:{ hidden: 'opacity:0;transform:translateX(28px)',  visible: 'opacity:1;transform:translateX(0)' },
+  scaleUp:  { hidden: 'opacity:0;transform:scale(0.94)',       visible: 'opacity:1;transform:scale(1)' },
+};
+
+function ScrollReveal({ children, animation = 'fadeUp', delay = 0, duration = 550, threshold = 0.12 }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -28,22 +16,17 @@ function ScrollReveal({
     if (!el) return;
 
     // Respect prefers-reduced-motion
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-      el.style.opacity = '1';
-      return;
-    }
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
 
-    el.style.opacity = '0';
+    const anim = animations[animation] || animations.fadeUp;
+    el.style.cssText += anim.hidden + ';transition:opacity ' + duration + 'ms cubic-bezier(.22,.68,0,1.2) ' + delay + 'ms,transform ' + duration + 'ms cubic-bezier(.22,.68,0,1.2) ' + delay + 'ms';
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            el.classList.add(`animate-${animation}`);
-            el.style.opacity = '';
-          }, delay);
-          observer.unobserve(el);
+          el.style.cssText += anim.visible;
+          observer.disconnect();
         }
       },
       { threshold }
@@ -51,13 +34,9 @@ function ScrollReveal({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [animation, delay, threshold]);
+  }, [animation, delay, duration, threshold]);
 
-  return (
-    <Tag ref={ref} className={className} style={style}>
-      {children}
-    </Tag>
-  );
+  return <div ref={ref}>{children}</div>;
 }
 
 export default ScrollReveal;
