@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import WhatsAppButton from './components/WhatsAppButton';
-import CookieBanner from './components/CookieBanner';
 import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
@@ -38,7 +37,6 @@ function App() {
         </main>
         <Footer />
         <WhatsAppButton />
-        <CookieBanner />
       </BrowserRouter>
     </HelmetProvider>
   );
