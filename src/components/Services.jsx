@@ -76,7 +76,7 @@ function Services() {
         {services.map((s, i) => (
           <article
             key={s.title}
-            className={`glass-card animate-scaleIn delay-${(i + 1) * 100}`}
+            className={`card animate-scaleIn delay-${(i + 1) * 100}`}
             style={{ padding: '2rem 1.8rem' }}
           >
             <div style={{

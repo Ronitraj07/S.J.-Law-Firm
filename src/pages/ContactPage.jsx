@@ -57,7 +57,7 @@ function ContactPage() {
           {/* Left: Info + Map */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
-            <div className="glass-card" style={{ padding: '1.8rem' }}>
+            <div className="card" style={{ padding: '1.8rem' }}>
               <h2 style={{ fontSize: '1rem', marginBottom: '1.2rem', borderBottom: '1px solid rgba(30,45,61,0.1)', paddingBottom: '0.6rem' }}>Our Team</h2>
               {teamMembers.map(m => (
                 <div key={m.slug} style={{ marginBottom: '1rem' }}>
@@ -68,7 +68,7 @@ function ContactPage() {
               ))}
             </div>
 
-            <div className="glass-card" style={{ padding: '1.8rem' }}>
+            <div className="card" style={{ padding: '1.8rem' }}>
               <h2 style={{ fontSize: '1rem', marginBottom: '1.2rem', borderBottom: '1px solid rgba(30,45,61,0.1)', paddingBottom: '0.6rem' }}>Office</h2>
               <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.9 }}>
                 S. &amp; J. Associates<br />
@@ -82,7 +82,7 @@ function ContactPage() {
             </div>
 
             {/* Google Map */}
-            <div className="glass-card" style={{ overflow: 'hidden', borderRadius: 'var(--radius-lg)' }}>
+            <div className="card" style={{ overflow: 'hidden', borderRadius: 'var(--radius-lg)' }}>
               <iframe
                 title="S. & J. Associates Office Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47900.406695787635!2d73.1423232113653!3d22.312206561114483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc56a595a6547%3A0xa762398f19877c44!2sS.%20%26%20J.%20Associates%20(Law%20Firm)!5e0!3m2!1sen!2sin!4v1776354309772!5m2!1sen!2sin"
@@ -98,7 +98,7 @@ function ContactPage() {
           </div>
 
           {/* Right: Form */}
-          <div className="glass-card" style={{ padding: '1.8rem' }}>
+          <div className="card" style={{ padding: '1.8rem' }}>
             <h2 style={{ fontSize: '1rem', marginBottom: '1.2rem', borderBottom: '1px solid rgba(30,45,61,0.1)', paddingBottom: '0.6rem' }}>Send a Message</h2>
             <form ref={formRef} onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.1rem' }}>
               <div>

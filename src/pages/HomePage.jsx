@@ -105,8 +105,8 @@ function HomePage() {
           {services.slice(0, 3).map((s, i) => (
             <Link key={s.slug} to={`/services/${s.slug}`} style={{ textDecoration: 'none' }}>
               <article
-                className={`glass-card animate-scaleIn delay-${(i % 3 + 1) * 100}`}
-                style={{ padding: '1.8rem', height: '100%', cursor: 'pointer', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}
+                className={`card animate-scaleIn delay-${(i % 3 + 1) * 100}`}
+                style={{ padding: '1.8rem', height: '100%', cursor: 'pointer' }}
                 onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-3px)'}
                 onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
               >
@@ -158,7 +158,7 @@ function HomePage() {
           {teamMembers.map((m, i) => (
             <Link key={m.slug} to={`/team/${m.slug}`} style={{ textDecoration: 'none' }}>
               <article
-                className={`glass-card animate-scaleIn delay-${(i + 1) * 100}`}
+                className={`card animate-scaleIn delay-${(i + 1) * 100}`}
                 style={{ padding: '2rem 1.8rem', textAlign: 'center', cursor: 'pointer' }}
               >
                 <img

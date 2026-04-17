@@ -40,10 +40,8 @@ function TeamPage() {
               <ScrollReveal key={m.slug} animation="fadeUp" delay={i * 100}>
                 <Link to={`/team/${m.slug}`} style={{ textDecoration: 'none' }}>
                   <article
-                    className="glass-card"
-                    style={{ padding: '2.2rem 1.8rem', textAlign: 'center', cursor: 'pointer', height: '100%', transition: 'transform 0.25s ease, box-shadow 0.25s ease' }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-glow)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'var(--shadow-card)'; }}
+                    className="card"
+                    style={{ padding: '2.2rem 1.8rem', textAlign: 'center', cursor: 'pointer', height: '100%' }}
                   >
                     <img
                       src={m.photo}

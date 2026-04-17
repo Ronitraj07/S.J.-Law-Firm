@@ -40,10 +40,8 @@ function ServicesPage() {
               <ScrollReveal key={s.slug} animation="fadeUp" delay={i * 80}>
                 <Link to={`/services/${s.slug}`} style={{ textDecoration: 'none' }}>
                   <article
-                    className="glass-card"
-                    style={{ padding: '2rem', height: '100%', cursor: 'pointer', transition: 'transform 0.25s ease, box-shadow 0.25s ease' }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-glow)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'var(--shadow-card)'; }}
+                    className="card"
+                    style={{ padding: '2rem', height: '100%', cursor: 'pointer' }}
                   >
                     <h2 style={{ fontSize: '1.05rem', marginBottom: '0.7rem' }}>{s.title}</h2>
                     <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.2rem' }}>{s.shortDesc}</p>
