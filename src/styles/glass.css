@@ -1,22 +1,28 @@
+/* ═══════════════════════════════════════════════
+   LAYOUT — Section wrapper
+═══════════════════════════════════════════════ */
 .section {
   max-width: 1140px;
-  margin: 0 auto;
-  padding: 5rem 2rem;
+  margin-inline: auto;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2rem);
 }
 
-@media (max-width: 768px) {
-  .section {
-    padding: 3rem 1.25rem;
-  }
+.section-alt {
+  background: var(--bg-light);
 }
 
-/* ---------- Cards ---------- */
+/* ═══════════════════════════════════════════════
+   CARDS
+═══════════════════════════════════════════════ */
 .card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(30,45,61,0.1);
+  border: 1px solid rgba(30,45,61,0.10);
   box-shadow: var(--shadow-card);
-  transition: transform 0.35s cubic-bezier(.22,.68,0,1), box-shadow 0.35s ease, border-color 0.35s ease;
+  transition:
+    transform 0.35s cubic-bezier(.22,.68,0,1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
 
 .card:hover {
@@ -25,11 +31,14 @@
   border-color: var(--gold-border);
 }
 
-/* ---------- Buttons ---------- */
+/* ═══════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════ */
 .btn-primary {
+  display: inline-block;
   background: var(--gold);
   color: #FFFFFF;
-  border: none;
+  border: 2px solid var(--gold);
   border-radius: var(--radius-sm);
   padding: 0.75rem 1.8rem;
   font-weight: 700;
@@ -40,15 +49,20 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 16px rgba(201, 161, 74, 0.22);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .btn-primary:hover {
   background: var(--gold-light);
+  border-color: var(--gold-light);
   box-shadow: 0 6px 24px rgba(201, 161, 74, 0.32);
   transform: translateY(-1px);
+  color: #fff;
 }
 
 .btn-outline {
+  display: inline-block;
   background: transparent;
   color: var(--navy);
   border-radius: var(--radius-sm);
@@ -61,6 +75,8 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .btn-outline:hover {
@@ -68,7 +84,9 @@
   color: #FFFFFF;
 }
 
-/* ---------- Navbar ---------- */
+/* ═══════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════ */
 .navbar {
   position: sticky;
   top: 0;
@@ -76,21 +94,23 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   background: rgba(254, 249, 239, 0.96);
-  border-bottom: 1px solid rgba(30,45,61,0.1);
+  border-bottom: 1px solid rgba(30,45,61,0.10);
 }
 
 .nav-inner {
   max-width: 1140px;
-  margin: 0 auto;
-  padding: 0.6rem 2rem;
+  margin-inline: auto;
+  padding: 0.65rem clamp(1.25rem, 4vw, 2rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
+  min-height: 60px;
 }
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 2rem;
   font-size: 0.8rem;
   font-family: var(--font-body);
@@ -104,6 +124,7 @@
   transition: color 0.25s ease;
   font-weight: 500;
   position: relative;
+  padding-bottom: 2px;
 }
 
 .nav-links a::after {
@@ -126,7 +147,7 @@
   width: 100%;
 }
 
-/* ---------- Navbar CTA ---------- */
+/* Navbar CTA */
 .nav-cta {
   display: inline-block;
   padding: 0.45rem 1.1rem;
@@ -150,7 +171,7 @@
   color: #ffffff;
 }
 
-/* ---------- Hamburger button ---------- */
+/* Hamburger */
 .nav-hamburger {
   display: none;
   flex-direction: column;
@@ -180,7 +201,7 @@
 .open-mid  { opacity: 0; transform: scaleX(0); }
 .open-bot  { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* ---------- Mobile drawer ---------- */
+/* Mobile drawer */
 .nav-drawer {
   max-height: 0;
   overflow: hidden;
@@ -190,20 +211,20 @@
 }
 
 .nav-drawer--open {
-  max-height: 420px;
+  max-height: 480px;
 }
 
 .nav-drawer-inner {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 0.5rem 1.5rem 1.25rem;
+  padding: 0.5rem 1.5rem 1.5rem;
 }
 
 .nav-drawer-link {
   display: block;
-  padding: 0.75rem 0;
-  font-size: 0.85rem;
+  padding: 0.8rem 0;
+  font-size: 0.88rem;
   font-family: var(--font-body);
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -218,30 +239,9 @@
   color: var(--navy);
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 768px) {
-  .nav-links--desktop {
-    display: none;
-  }
-  .nav-cta--desktop {
-    display: none;
-  }
-  .nav-hamburger {
-    display: flex;
-  }
-  .nav-inner {
-    flex-direction: row;
-    padding: 0.6rem 1.25rem;
-  }
-}
-
-@media (min-width: 769px) {
-  .nav-drawer {
-    display: none;
-  }
-}
-
-/* ---------- Section headings ---------- */
+/* ═══════════════════════════════════════════════
+   SECTION HEADINGS
+═══════════════════════════════════════════════ */
 .section-label {
   display: inline-flex;
   align-items: center;
@@ -271,7 +271,17 @@
   line-height: 1.75;
 }
 
-/* ---------- Form inputs ---------- */
+.divider {
+  width: 100%;
+  max-width: 80px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 0.8rem 0 1.8rem;
+}
+
+/* ═══════════════════════════════════════════════
+   FORMS
+═══════════════════════════════════════════════ */
 .form-input {
   width: 100%;
   border-radius: var(--radius-sm);
@@ -287,7 +297,7 @@
 
 .form-input:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(201, 161, 74, 0.1);
+  box-shadow: 0 0 0 3px rgba(201, 161, 74, 0.10);
 }
 
 .form-label {
@@ -299,16 +309,23 @@
   letter-spacing: 0.03em;
 }
 
-/* ---------- Divider ---------- */
-.divider {
-  width: 100%;
-  max-width: 80px;
-  height: 1.5px;
-  background: linear-gradient(90deg, var(--gold), transparent);
-  margin: 0.8rem 0 1.8rem;
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-links--desktop {
+    display: none;
+  }
+  .nav-cta--desktop {
+    display: none;
+  }
+  .nav-hamburger {
+    display: flex;
+  }
 }
 
-/* ---------- Alt section bg ---------- */
-.section-alt {
-  background: var(--bg-light);
+@media (min-width: 769px) {
+  .nav-drawer {
+    display: none;
+  }
 }

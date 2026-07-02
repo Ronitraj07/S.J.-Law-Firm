@@ -12,7 +12,7 @@ const AREAS = [
 
 function Hero() {
   return (
-    <header style={{ position: 'relative', overflow: 'hidden' }}>
+    <header style={{ position: 'relative', overflow: 'hidden', background: 'var(--navy)' }}>
       {/* Background */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <img
@@ -20,33 +20,46 @@ function Hero() {
           alt=""
           width={1920}
           height={1080}
+          loading="eager"
+          decoding="async"
           style={{
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            opacity: 0.12,
+            opacity: 0.10,
             filter: 'grayscale(40%)',
           }}
         />
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(30,45,61,0.93) 0%, rgba(30,45,61,0.98) 100%)',
+          background: 'linear-gradient(160deg, rgba(20,31,43,0.97) 0%, rgba(30,45,61,0.96) 100%)',
         }} />
       </div>
 
-      <div className="section" style={{ position: 'relative', zIndex: 1, paddingTop: '4rem', paddingBottom: '5rem' }}>
+      {/* Content */}
+      <div
+        className="section"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          paddingTop: 'clamp(3.5rem, 8vw, 6rem)',
+          paddingBottom: 'clamp(3.5rem, 8vw, 6rem)',
+        }}
+      >
         <div style={{
           display: 'grid',
-          gap: '3.5rem',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '3rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
           alignItems: 'center',
         }}>
 
           {/* Left — headline + CTAs */}
           <div className="animate-slideInLeft">
-            <p className="section-label" style={{ color: 'var(--gold)' }}>S. &amp; J. Associates &bull; Vadodara</p>
-            <h1 style={{ marginBottom: '1.5rem', color: '#FFFFFF' }}>
+            <p className="section-label" style={{ color: 'var(--gold)' }}>
+              S.&nbsp;&amp;&nbsp;J. Associates &bull; Vadodara
+            </p>
+            <h1 style={{ marginBottom: '1.5rem', color: '#FFFFFF', maxWidth: '18ch' }}>
               Client&#8209;focused, practical &amp; result&#8209;driven legal solutions.
             </h1>
             <div className="divider" />
@@ -59,14 +72,24 @@ function Hero() {
               We assist individuals and businesses with clear advice, strong representation and
               reliable legal support in contentious and non&#8209;contentious matters.
             </p>
-            <div style={{ marginTop: '2.2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{
+              marginTop: '2.2rem',
+              display: 'flex',
+              gap: '1rem',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+            }}>
               <Link to="/contact" className="btn-primary" style={{ textDecoration: 'none' }}>
                 Book a Consultation
               </Link>
               <Link
                 to="/services"
                 className="btn-outline"
-                style={{ textDecoration: 'none', color: 'rgba(255,255,255,0.85)', borderColor: 'rgba(255,255,255,0.35)' }}
+                style={{
+                  textDecoration: 'none',
+                  color: 'rgba(255,255,255,0.85)',
+                  borderColor: 'rgba(255,255,255,0.35)',
+                }}
               >
                 Our Practice Areas
               </Link>
@@ -74,15 +97,19 @@ function Hero() {
           </div>
 
           {/* Right — practice areas card */}
-          <div className="animate-slideInRight" style={{ display: 'flex', justifyContent: 'center' }}>
+          <div
+            className="animate-slideInRight"
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}
+          >
             <div style={{
-              padding: '2rem 2rem 1.8rem',
+              padding: '1.8rem 2rem',
               width: '100%',
               maxWidth: '360px',
               background: 'rgba(255,255,255,0.06)',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid rgba(255,255,255,0.12)',
               backdropFilter: 'blur(18px)',
+              WebkitBackdropFilter: 'blur(18px)',
             }}>
               <p style={{
                 fontSize: '0.68rem',
@@ -97,7 +124,7 @@ function Hero() {
               }}>
                 Practice Areas
               </p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {AREAS.map((area, i) => (
                   <li
                     key={area}
@@ -107,7 +134,7 @@ function Hero() {
                       gap: '0.65rem',
                       padding: '0.62rem 0',
                       borderBottom: i < AREAS.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-                      color: 'rgba(255,255,255,0.78)',
+                      color: 'rgba(255,255,255,0.80)',
                       fontSize: '0.88rem',
                       lineHeight: 1.4,
                       fontFamily: 'var(--font-body)',
@@ -119,7 +146,7 @@ function Hero() {
                       borderRadius: '50%',
                       background: 'var(--gold)',
                       flexShrink: 0,
-                      opacity: 0.8,
+                      opacity: 0.85,
                     }} />
                     {area}
                   </li>
@@ -130,6 +157,8 @@ function Hero() {
                 style={{
                   display: 'block',
                   marginTop: '1.2rem',
+                  paddingTop: '0.9rem',
+                  borderTop: '1px solid rgba(255,255,255,0.07)',
                   fontSize: '0.78rem',
                   color: 'var(--gold)',
                   fontWeight: 600,
