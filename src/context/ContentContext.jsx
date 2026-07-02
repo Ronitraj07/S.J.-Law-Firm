@@ -1,0 +1,108 @@
+/**
+ * ContentContext — merges Firestore live data over static JS defaults.
+ * Any section saved from the admin panel overwrites the static data.
+ * Components read from this context instead of importing data files directly.
+ */
+import { createContext, useContext, useEffect, useState } from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase';
+import { services as defaultServices } from '../data/services';
+import { teamMembers as defaultTeam } from '../data/team';
+
+const ContentContext = createContext(null);
+
+export const defaultHero = {
+  tagline: 'S. & J. Associates · Vadodara',
+  heading: 'Client\u2011focused, practical & result\u2011driven legal solutions.',
+  subheading:
+    'We assist individuals and businesses with clear advice, strong representation and reliable legal support in contentious and non\u2011contentious matters.',
+  ctaPrimary: 'Book a Consultation',
+  ctaSecondary: 'Our Practice Areas',
+};
+
+export const defaultApproach = [
+  { step: '01', title: 'Initial Consultation', desc: 'We listen to your matter in full, ask clarifying questions and give you an honest initial assessment of your legal position.' },
+  { step: '02', title: 'Written Case Assessment', desc: 'You receive a clear written summary of the legal position, options available and our recommended course of action.' },
+  { step: '03', title: 'Engagement & Strategy', desc: 'We agree on a fee structure upfront, then execute the agreed strategy with regular updates at every stage.' },
+];
+
+export const defaultContact = {
+  heading: 'Schedule a Confidential Consultation',
+  subheading:
+    'Share a brief overview of your matter. Our team will review your request and reach out with available slots.',
+  email: 'contact@sjassociates.com',
+  phone_rituraj: '+91 82003 80901',
+  phone_swati: '+91 88004 13165',
+  phone_abhishek: '+91 98710 12151',
+  address: 'Vadodara, Gujarat, India',
+  whatsapp_number: '918200380901',
+};
+
+export const defaultSeo = {
+  siteName: 'S. & J. Associates',
+  siteUrl: 'https://sjassociates.com',
+  defaultTitle: 'S. & J. Associates — Legal Services',
+  defaultDescription:
+    'S. & J. Associates is a client-focused law firm offering practical, ethical legal solutions in litigation, corporate law, arbitration, data privacy, documentation and family matters.',
+  ogImage: '/og-image.jpg',
+  twitterHandle: '',
+};
+
+export function ContentProvider({ children }) {
+  const [hero, setHero] = useState(defaultHero);
+  const [approach, setApproach] = useState(defaultApproach);
+  const [contact, setContact] = useState(defaultContact);
+  const [seo, setSeo] = useState(defaultSeo);
+  const [services, setServices] = useState(defaultServices);
+  const [team, setTeam] = useState(defaultTeam);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubs = [];
+
+    const sections = [
+      { id: 'hero', setter: setHero, fallback: defaultHero },
+      { id: 'approach', setter: setApproach, fallback: defaultApproach },
+      { id: 'contact', setter: setContact, fallback: defaultContact },
+      { id: 'seo', setter: setSeo, fallback: defaultSeo },
+      { id: 'services', setter: setServices, fallback: defaultServices },
+      { id: 'team', setter: setTeam, fallback: defaultTeam },
+    ];
+
+    let resolved = 0;
+    sections.forEach(({ id, setter, fallback }) => {
+      const unsub = onSnapshot(
+        doc(db, 'content', id),
+        (snap) => {
+          if (snap.exists()) {
+            setter(snap.data().value ?? fallback);
+          } else {
+            setter(fallback);
+          }
+          resolved++;
+          if (resolved >= sections.length) setLoading(false);
+        },
+        () => {
+          setter(fallback);
+          resolved++;
+          if (resolved >= sections.length) setLoading(false);
+        }
+      );
+      unsubs.push(unsub);
+    });
+
+    return () => unsubs.forEach((u) => u());
+  }, []);
+
+  return (
+    <ContentContext.Provider value={{ hero, approach, contact, seo, services, team, loading }}>
+      {children}
+    </ContentContext.Provider>
+  );
+}
+
+export function useContent() {
+  const ctx = useContext(ContentContext);
+  if (!ctx) throw new Error('useContent must be used inside ContentProvider');
+  return ctx;
+}
