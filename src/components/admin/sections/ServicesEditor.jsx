@@ -1,135 +1,131 @@
-import { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../../firebase';
-import { useContent } from '../../../context/ContentContext';
+import { useState, useEffect } from 'react';
+import { supabase } from '../../../supabase';
 
 const emptyService = () => ({
-  slug: '',
-  title: '',
-  shortDesc: '',
-  fullDesc: '',
-  icon: 'document',
-  practicePoints: [''],
-  attorneys: [],
-  metaDescription: '',
+  slug: '', title: '', icon: '', tagline: '', short_description: '',
+  description: '', details: [], display_order: 0, published: true,
 });
 
-function ServicesEditor() {
-  const { services } = useContent();
-  const [items, setItems] = useState(services.map(s => ({ ...s, practicePoints: [...s.practicePoints] })));
-  const [expanded, setExpanded] = useState(0);
+export default function ServicesEditor() {
+  const [services, setServices] = useState([]);
+  const [expanded, setExpanded] = useState(null);
   const [status, setStatus] = useState('idle');
+  const [loading, setLoading] = useState(true);
 
-  const updateItem = (index, key, val) => {
-    setItems(prev => prev.map((s, i) => i === index ? { ...s, [key]: val } : s));
-  };
+  useEffect(() => {
+    supabase.from('services').select('*').order('display_order').then(({ data }) => {
+      if (data) setServices(data);
+      setLoading(false);
+    });
+  }, []);
 
-  const updatePoint = (si, pi, val) => {
-    setItems(prev => prev.map((s, i) => {
-      if (i !== si) return s;
-      const pts = [...s.practicePoints];
-      pts[pi] = val;
-      return { ...s, practicePoints: pts };
-    }));
-  };
-
-  const addPoint = (si) => {
-    setItems(prev => prev.map((s, i) => i === si ? { ...s, practicePoints: [...s.practicePoints, ''] } : s));
-  };
-
-  const removePoint = (si, pi) => {
-    setItems(prev => prev.map((s, i) => i === si ? { ...s, practicePoints: s.practicePoints.filter((_, j) => j !== pi) } : s));
-  };
+  const update = (i, key, val) =>
+    setServices(prev => prev.map((s, j) => j === i ? { ...s, [key]: val } : s));
 
   const addService = () => {
-    setItems(prev => [...prev, emptyService()]);
-    setExpanded(items.length);
+    setServices(prev => [...prev, emptyService()]);
+    setExpanded(services.length);
   };
 
-  const removeService = (index) => {
-    setItems(prev => prev.filter((_, i) => i !== index));
-    setExpanded(Math.max(0, index - 1));
+  const removeService = async (i) => {
+    const svc = services[i];
+    if (svc.id) await supabase.from('services').delete().eq('id', svc.id);
+    setServices(prev => prev.filter((_, j) => j !== i));
+    if (expanded === i) setExpanded(null);
   };
 
   const handleSave = async () => {
     setStatus('saving');
-    try {
-      await setDoc(doc(db, 'content', 'services'), { value: items });
-      setStatus('saved');
-      setTimeout(() => setStatus('idle'), 2500);
-    } catch {
-      setStatus('error');
-      setTimeout(() => setStatus('idle'), 3000);
+    for (const svc of services) {
+      const { id, created_at, updated_at, ...rest } = svc;
+      if (id) {
+        await supabase.from('services').update(rest).eq('id', id);
+      } else {
+        await supabase.from('services').insert(rest);
+      }
     }
+    // Reload
+    const { data } = await supabase.from('services').select('*').order('display_order');
+    if (data) setServices(data);
+    setStatus('saved');
+    setTimeout(() => setStatus('idle'), 2500);
   };
+
+  if (loading) return <div className="admin-loading">Loading services…</div>;
 
   return (
     <div>
-      {status === 'saved' && <div className="admin-alert success">\u2713 Services saved and live.</div>}
-      {status === 'error' && <div className="admin-alert error">Save failed.</div>}
+      <div className="admin-topbar">
+        <h1 className="admin-page-title">Services</h1>
+        <div style={{ display: 'flex', gap: '0.75rem' }}>
+          <button className="admin-btn admin-btn-secondary" onClick={addService}>+ Add Service</button>
+          <button className="admin-btn admin-btn-primary" onClick={handleSave} disabled={status === 'saving'}>
+            {status === 'saving' ? 'Saving…' : '↑ Save All'}
+          </button>
+        </div>
+      </div>
 
-      {items.map((service, si) => (
-        <div key={si} className="admin-item-card">
+      {status === 'saved' && <div className="admin-alert success">✓ Services saved.</div>}
+      {status === 'error'  && <div className="admin-alert error">Save failed.</div>}
+
+      {services.map((svc, i) => (
+        <div key={i} className="admin-item-card">
           <div className="admin-item-card-header">
             <button
-              className="admin-item-card-label"
-              style={{ cursor: 'pointer', background: 'none', border: 'none', textAlign: 'left', font: 'inherit', color: 'var(--navy)', fontWeight: 700, fontSize: '0.78rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}
-              onClick={() => setExpanded(expanded === si ? null : si)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, color: '#1e2d3d' }}
+              onClick={() => setExpanded(expanded === i ? null : i)}
             >
-              {expanded === si ? '\u25bc' : '\u25ba'} {service.title || `Service ${si + 1}`}
+              {expanded === i ? '▾' : '▸'} {svc.title || '(Untitled Service)'}
             </button>
-            <button className="admin-btn admin-btn-danger admin-btn-sm" onClick={() => removeService(si)}>Remove</button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <label style={{ fontSize: '0.78rem', color: '#6b7280', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                <input
+                  type="checkbox"
+                  checked={svc.published}
+                  onChange={e => update(i, 'published', e.target.checked)}
+                />
+                Published
+              </label>
+              <button className="admin-btn admin-btn-danger admin-btn-sm" onClick={() => removeService(i)}>✕</button>
+            </div>
           </div>
 
-          {expanded === si && (
-            <>
+          {expanded === i && (
+            <div>
               <div className="admin-grid-2">
                 <div className="admin-field">
                   <label className="admin-label">Title</label>
-                  <input className="admin-input" value={service.title} onChange={e => updateItem(si, 'title', e.target.value)} />
+                  <input className="admin-input" value={svc.title} onChange={e => update(i, 'title', e.target.value)} />
                 </div>
                 <div className="admin-field">
-                  <label className="admin-label">Slug <span>url-friendly, no spaces</span></label>
-                  <input className="admin-input" value={service.slug} onChange={e => updateItem(si, 'slug', e.target.value.toLowerCase().replace(/\s+/g, '-'))} />
+                  <label className="admin-label">Slug <span>URL key</span></label>
+                  <input className="admin-input" value={svc.slug} onChange={e => update(i, 'slug', e.target.value)} />
+                </div>
+                <div className="admin-field">
+                  <label className="admin-label">Icon <span>emoji or SVG name</span></label>
+                  <input className="admin-input" value={svc.icon || ''} onChange={e => update(i, 'icon', e.target.value)} />
+                </div>
+                <div className="admin-field">
+                  <label className="admin-label">Display Order</label>
+                  <input type="number" className="admin-input" value={svc.display_order} onChange={e => update(i, 'display_order', Number(e.target.value))} />
                 </div>
               </div>
               <div className="admin-field">
-                <label className="admin-label">Short Description <span>shown on cards</span></label>
-                <textarea className="admin-textarea" value={service.shortDesc} onChange={e => updateItem(si, 'shortDesc', e.target.value)} rows={3} />
+                <label className="admin-label">Tagline</label>
+                <input className="admin-input" value={svc.tagline || ''} onChange={e => update(i, 'tagline', e.target.value)} />
               </div>
               <div className="admin-field">
-                <label className="admin-label">Full Description <span>service detail page</span></label>
-                <textarea className="admin-textarea" value={service.fullDesc} onChange={e => updateItem(si, 'fullDesc', e.target.value)} rows={5} />
+                <label className="admin-label">Short Description <span>for cards</span></label>
+                <textarea className="admin-textarea" rows={2} value={svc.short_description || ''} onChange={e => update(i, 'short_description', e.target.value)} />
               </div>
               <div className="admin-field">
-                <label className="admin-label">Meta Description <span>for SEO</span></label>
-                <textarea className="admin-textarea" value={service.metaDescription} onChange={e => updateItem(si, 'metaDescription', e.target.value)} rows={2} />
+                <label className="admin-label">Full Description</label>
+                <textarea className="admin-textarea" rows={5} value={svc.description || ''} onChange={e => update(i, 'description', e.target.value)} />
               </div>
-
-              <div className="admin-field">
-                <label className="admin-label">Practice Points</label>
-                {service.practicePoints.map((pt, pi) => (
-                  <div key={pi} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.4rem' }}>
-                    <input className="admin-input" value={pt} onChange={e => updatePoint(si, pi, e.target.value)} />
-                    <button className="admin-btn-icon" onClick={() => removePoint(si, pi)} title="Remove">\u2715</button>
-                  </div>
-                ))}
-                <button className="admin-btn admin-btn-secondary admin-btn-sm" style={{ marginTop: '0.4rem' }} onClick={() => addPoint(si)}>+ Add Point</button>
-              </div>
-            </>
+            </div>
           )}
         </div>
       ))}
-
-      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem' }}>
-        <button className="admin-btn admin-btn-secondary" onClick={addService}>+ Add Service</button>
-      </div>
-
-      <button className="admin-btn admin-btn-primary" onClick={handleSave} disabled={status === 'saving'}>
-        {status === 'saving' ? 'Saving\u2026' : 'Save All Services'}
-      </button>
     </div>
   );
 }
-
-export default ServicesEditor;

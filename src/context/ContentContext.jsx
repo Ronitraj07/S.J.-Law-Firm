@@ -1,11 +1,9 @@
 /**
- * ContentContext — merges Firestore live data over static JS defaults.
- * Any section saved from the admin panel overwrites the static data.
- * Components read from this context instead of importing data files directly.
+ * ContentContext — loads all site content from Supabase (site_settings,
+ * services, team_members tables). Falls back to static defaults if offline.
  */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebase';
+import { supabase } from '../supabase';
 import { services as defaultServices } from '../data/services';
 import { teamMembers as defaultTeam } from '../data/team';
 
@@ -13,9 +11,9 @@ const ContentContext = createContext(null);
 
 export const defaultHero = {
   tagline: 'S. & J. Associates · Vadodara',
-  heading: 'Client\u2011focused, practical & result\u2011driven legal solutions.',
+  heading: 'Client‑focused, practical & result‑driven legal solutions.',
   subheading:
-    'We assist individuals and businesses with clear advice, strong representation and reliable legal support in contentious and non\u2011contentious matters.',
+    'We assist individuals and businesses with clear advice, strong representation and reliable legal support in contentious and non‑contentious matters.',
   ctaPrimary: 'Book a Consultation',
   ctaSecondary: 'Our Practice Areas',
 };
@@ -28,8 +26,7 @@ export const defaultApproach = [
 
 export const defaultContact = {
   heading: 'Schedule a Confidential Consultation',
-  subheading:
-    'Share a brief overview of your matter. Our team will review your request and reach out with available slots.',
+  subheading: 'Share a brief overview of your matter. Our team will review your request and reach out with available slots.',
   email: 'contact@sjassociates.com',
   phone_rituraj: '+91 82003 80901',
   phone_swati: '+91 88004 13165',
@@ -49,49 +46,55 @@ export const defaultSeo = {
 };
 
 export function ContentProvider({ children }) {
-  const [hero, setHero] = useState(defaultHero);
+  const [hero,     setHero]     = useState(defaultHero);
   const [approach, setApproach] = useState(defaultApproach);
-  const [contact, setContact] = useState(defaultContact);
-  const [seo, setSeo] = useState(defaultSeo);
+  const [contact,  setContact]  = useState(defaultContact);
+  const [seo,      setSeo]      = useState(defaultSeo);
   const [services, setServices] = useState(defaultServices);
-  const [team, setTeam] = useState(defaultTeam);
-  const [loading, setLoading] = useState(true);
+  const [team,     setTeam]     = useState(defaultTeam);
+  const [loading,  setLoading]  = useState(true);
 
   useEffect(() => {
-    const unsubs = [];
+    let active = true;
 
-    const sections = [
-      { id: 'hero', setter: setHero, fallback: defaultHero },
-      { id: 'approach', setter: setApproach, fallback: defaultApproach },
-      { id: 'contact', setter: setContact, fallback: defaultContact },
-      { id: 'seo', setter: setSeo, fallback: defaultSeo },
-      { id: 'services', setter: setServices, fallback: defaultServices },
-      { id: 'team', setter: setTeam, fallback: defaultTeam },
-    ];
+    async function load() {
+      // Load site_settings (hero, approach, contact, seo)
+      const { data: settings } = await supabase
+        .from('site_settings')
+        .select('key, value');
 
-    let resolved = 0;
-    sections.forEach(({ id, setter, fallback }) => {
-      const unsub = onSnapshot(
-        doc(db, 'content', id),
-        (snap) => {
-          if (snap.exists()) {
-            setter(snap.data().value ?? fallback);
-          } else {
-            setter(fallback);
-          }
-          resolved++;
-          if (resolved >= sections.length) setLoading(false);
-        },
-        () => {
-          setter(fallback);
-          resolved++;
-          if (resolved >= sections.length) setLoading(false);
-        }
-      );
-      unsubs.push(unsub);
-    });
+      if (active && settings) {
+        settings.forEach(({ key, value }) => {
+          if (key === 'hero')     setHero(value);
+          if (key === 'approach') setApproach(value);
+          if (key === 'contact')  setContact(value);
+          if (key === 'seo')      setSeo(value);
+        });
+      }
 
-    return () => unsubs.forEach((u) => u());
+      // Load published services
+      const { data: svcRows } = await supabase
+        .from('services')
+        .select('*')
+        .eq('published', true)
+        .order('display_order');
+
+      if (active && svcRows && svcRows.length > 0) setServices(svcRows);
+
+      // Load published team members
+      const { data: teamRows } = await supabase
+        .from('team_members')
+        .select('*')
+        .eq('published', true)
+        .order('display_order');
+
+      if (active && teamRows && teamRows.length > 0) setTeam(teamRows);
+
+      if (active) setLoading(false);
+    }
+
+    load();
+    return () => { active = false; };
   }, []);
 
   return (

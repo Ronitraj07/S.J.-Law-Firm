@@ -1,74 +1,73 @@
 import { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../../firebase';
+import { supabase } from '../../../supabase';
 import { useContent } from '../../../context/ContentContext';
 
-function HeroEditor() {
-  const { hero } = useContent();
-  const [form, setForm] = useState({ ...hero });
-  const [status, setStatus] = useState('idle'); // idle | saving | saved | error
+export default function HeroEditor() {
+  const { hero: ctxHero } = useContent();
+  const [form, setForm] = useState(ctxHero);
+  const [status, setStatus] = useState('idle');
 
-  // keep in sync if context updates from another tab
-  // (intentionally not using useEffect to avoid overwriting unsaved changes)
-
-  const set = (key, val) => setForm(f => ({ ...f, [key]: val }));
+  const set = (key, val) => setForm(prev => ({ ...prev, [key]: val }));
 
   const handleSave = async () => {
     setStatus('saving');
-    try {
-      await setDoc(doc(db, 'content', 'hero'), { value: form });
-      setStatus('saved');
-      setTimeout(() => setStatus('idle'), 2500);
-    } catch {
-      setStatus('error');
-      setTimeout(() => setStatus('idle'), 3000);
-    }
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert({ key: 'hero', value: form }, { onConflict: 'key' });
+    if (error) { setStatus('error'); setTimeout(() => setStatus('idle'), 3000); return; }
+    setStatus('saved');
+    setTimeout(() => setStatus('idle'), 2500);
   };
 
   return (
     <div>
-      {status === 'saved' && <div className="admin-alert success">\u2713 Hero section saved and live.</div>}
-      {status === 'error' && <div className="admin-alert error">Save failed. Check Firestore permissions.</div>}
-
-      <div className="admin-card">
-        <p className="admin-card-title">Hero Content</p>
-
-        <div className="admin-field">
-          <label className="admin-label">Tagline <span>small label above heading</span></label>
-          <input className="admin-input" value={form.tagline} onChange={e => set('tagline', e.target.value)} />
-        </div>
-
-        <div className="admin-field">
-          <label className="admin-label">Main Heading</label>
-          <textarea className="admin-textarea" value={form.heading} onChange={e => set('heading', e.target.value)} rows={3} />
-        </div>
-
-        <div className="admin-field">
-          <label className="admin-label">Subheading / Description</label>
-          <textarea className="admin-textarea" value={form.subheading} onChange={e => set('subheading', e.target.value)} rows={4} />
-        </div>
-
-        <div className="admin-grid-2">
-          <div className="admin-field">
-            <label className="admin-label">Primary CTA Button Text</label>
-            <input className="admin-input" value={form.ctaPrimary} onChange={e => set('ctaPrimary', e.target.value)} />
-          </div>
-          <div className="admin-field">
-            <label className="admin-label">Secondary CTA Button Text</label>
-            <input className="admin-input" value={form.ctaSecondary} onChange={e => set('ctaSecondary', e.target.value)} />
-          </div>
-        </div>
-
+      <div className="admin-topbar">
+        <h1 className="admin-page-title">Hero Section</h1>
         <button
           className="admin-btn admin-btn-primary"
           onClick={handleSave}
           disabled={status === 'saving'}
         >
-          {status === 'saving' ? 'Saving\u2026' : 'Save Hero Section'}
+          {status === 'saving' ? 'Saving…' : '↑ Save & Publish'}
         </button>
+      </div>
+
+      {status === 'saved' && <div className="admin-alert success">✓ Hero saved and live.</div>}
+      {status === 'error' && <div className="admin-alert error">Save failed — check console.</div>}
+
+      <div className="admin-card">
+        <div className="admin-card-title">Tagline</div>
+        <div className="admin-field">
+          <label className="admin-label">Tagline <span>small text above heading</span></label>
+          <input className="admin-input" value={form.tagline || ''} onChange={e => set('tagline', e.target.value)} />
+        </div>
+      </div>
+
+      <div className="admin-card">
+        <div className="admin-card-title">Heading & Subheading</div>
+        <div className="admin-field">
+          <label className="admin-label">Main Heading</label>
+          <textarea className="admin-textarea" rows={3} value={form.heading || ''} onChange={e => set('heading', e.target.value)} />
+        </div>
+        <div className="admin-field">
+          <label className="admin-label">Subheading</label>
+          <textarea className="admin-textarea" rows={3} value={form.subheading || ''} onChange={e => set('subheading', e.target.value)} />
+        </div>
+      </div>
+
+      <div className="admin-card">
+        <div className="admin-card-title">CTA Buttons</div>
+        <div className="admin-grid-2">
+          <div className="admin-field">
+            <label className="admin-label">Primary Button</label>
+            <input className="admin-input" value={form.ctaPrimary || ''} onChange={e => set('ctaPrimary', e.target.value)} />
+          </div>
+          <div className="admin-field">
+            <label className="admin-label">Secondary Button</label>
+            <input className="admin-input" value={form.ctaSecondary || ''} onChange={e => set('ctaSecondary', e.target.value)} />
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-
-export default HeroEditor;
