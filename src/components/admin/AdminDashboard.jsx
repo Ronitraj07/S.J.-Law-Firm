@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { supabase } from '../../supabase';
 import { useAuth } from '../../context/AuthContext';
 import '../../styles/admin.css';
 
-import DashboardOverview  from './sections/DashboardOverview';
-import HeroEditor         from './sections/HeroEditor';
-import ApproachEditor     from './sections/ApproachEditor';
-import ServicesEditor     from './sections/ServicesEditor';
-import TeamEditor         from './sections/TeamEditor';
-import ContactEditor      from './sections/ContactEditor';
-import SeoEditor          from './sections/SeoEditor';
-import ArticlesEditor     from './sections/ArticlesEditor';
-import InquiriesViewer    from './sections/InquiriesViewer';
-import AdminSettings      from './sections/AdminSettings';
+import DashboardOverview from './sections/DashboardOverview';
+import HeroEditor        from './sections/HeroEditor';
+import ApproachEditor   from './sections/ApproachEditor';
+import ServicesEditor   from './sections/ServicesEditor';
+import TeamEditor       from './sections/TeamEditor';
+import ContactEditor    from './sections/ContactEditor';
+import SeoEditor        from './sections/SeoEditor';
+import ArticlesEditor   from './sections/ArticlesEditor';
+import InquiriesViewer  from './sections/InquiriesViewer';
+import AdminSettings    from './sections/AdminSettings';
 
 const NAV_GROUPS = [
   {
@@ -24,19 +23,19 @@ const NAV_GROUPS = [
   {
     label: 'Website Content',
     items: [
-      { path: 'hero',     label: 'Hero Section',  icon: '⬛' },
-      { path: 'approach', label: 'Our Approach',   icon: '≡' },
-      { path: 'services', label: 'Services',       icon: '⚖' },
-      { path: 'team',     label: 'Team Members',   icon: '👤' },
-      { path: 'contact',  label: 'Contact Info',   icon: '✉' },
-      { path: 'seo',      label: 'SEO & Meta',     icon: '🔍' },
+      { path: 'hero',     label: 'Hero Section', icon: '⬛' },
+      { path: 'approach', label: 'Our Approach',  icon: '≡'  },
+      { path: 'services', label: 'Services',      icon: '⚖'  },
+      { path: 'team',     label: 'Team Members',  icon: '👤' },
+      { path: 'contact',  label: 'Contact Info',  icon: '✉'  },
+      { path: 'seo',      label: 'SEO & Meta',    icon: '🔍' },
     ],
   },
   {
     label: 'Database',
     items: [
-      { path: 'articles',  label: 'Articles / Blog',     icon: '📄' },
-      { path: 'inquiries', label: 'Contact Inquiries',    icon: '📥' },
+      { path: 'articles',  label: 'Articles / Blog',  icon: '📄' },
+      { path: 'inquiries', label: 'Contact Inquiries', icon: '📥' },
     ],
   },
   {
@@ -46,18 +45,22 @@ const NAV_GROUPS = [
 ];
 
 export default function AdminDashboard() {
-  const { user } = useAuth();
-  const navigate  = useNavigate();
+  const { user }   = useAuth();
+  const navigate   = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleSignOut = async () => {
-    await signOut(auth);
+    await supabase.auth.signOut();
     navigate('/admin/login');
   };
 
+  // Supabase user metadata (from Google OAuth)
+  const displayName = user?.user_metadata?.full_name || user?.email;
+  const photoURL    = user?.user_metadata?.avatar_url;
+  const email       = user?.email;
+
   return (
     <div className="admin-wrap">
-      {/* Mobile overlay */}
       {mobileOpen && (
         <div
           className="admin-mobile-overlay"
@@ -65,7 +68,6 @@ export default function AdminDashboard() {
         />
       )}
 
-      {/* Sidebar */}
       <aside className={`admin-sidebar${mobileOpen ? ' open' : ''}`}>
         <div className="admin-sidebar-header">
           <span className="admin-sidebar-logo">S.J. Law Firm</span>
@@ -95,30 +97,26 @@ export default function AdminDashboard() {
         </nav>
 
         <div className="admin-sidebar-footer">
-          {user && (
-            <div className="admin-user">
-              {user.photoURL && (
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName || 'Admin'}
-                  className="admin-user-avatar"
-                />
-              )}
-              <div className="admin-user-info">
-                <div className="admin-user-name">{user.displayName}</div>
-                <div className="admin-user-email">{user.email}</div>
-              </div>
+          <div className="admin-user">
+            {photoURL && (
+              <img
+                src={photoURL}
+                alt={displayName || 'Admin'}
+                className="admin-user-avatar"
+              />
+            )}
+            <div className="admin-user-info">
+              <div className="admin-user-name">{displayName}</div>
+              <div className="admin-user-email">{email}</div>
             </div>
-          )}
+          </div>
           <button onClick={handleSignOut} className="admin-signout-btn">
             ⏻ Sign Out
           </button>
         </div>
       </aside>
 
-      {/* Main */}
       <main className="admin-main">
-        {/* Mobile top bar */}
         <div className="admin-mobile-topbar">
           <button
             className="admin-hamburger"
@@ -135,17 +133,17 @@ export default function AdminDashboard() {
 
         <Routes>
           <Route index              element={<DashboardOverview />} />
-          <Route path="hero"       element={<HeroEditor />} />
-          <Route path="approach"   element={<ApproachEditor />} />
-          <Route path="services"   element={<ServicesEditor />} />
-          <Route path="team"       element={<TeamEditor />} />
-          <Route path="contact"    element={<ContactEditor />} />
-          <Route path="seo"        element={<SeoEditor />} />
-          <Route path="articles"   element={<ArticlesEditor />} />
+          <Route path="hero"        element={<HeroEditor />} />
+          <Route path="approach"    element={<ApproachEditor />} />
+          <Route path="services"    element={<ServicesEditor />} />
+          <Route path="team"        element={<TeamEditor />} />
+          <Route path="contact"     element={<ContactEditor />} />
+          <Route path="seo"         element={<SeoEditor />} />
+          <Route path="articles"    element={<ArticlesEditor />} />
           <Route path="articles/new"  element={<ArticlesEditor newMode />} />
-          <Route path="articles/:id" element={<ArticlesEditor />} />
-          <Route path="inquiries"  element={<InquiriesViewer />} />
-          <Route path="settings"   element={<AdminSettings />} />
+          <Route path="articles/:id"  element={<ArticlesEditor />} />
+          <Route path="inquiries"   element={<InquiriesViewer />} />
+          <Route path="settings"    element={<AdminSettings />} />
         </Routes>
       </main>
     </div>
